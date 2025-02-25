@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/24 22:02:51 by ataai            ###   ########.fr       */
+/*   Updated: 2025/02/25 17:07:58 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,8 @@ typedef struct s_env
 }	t_env;
 int	print_env(t_env *env);
 void	ft_putstr(char *str);
+int	my_export_write(t_env *env, char *arg);
+void	env_add_back(t_env **lst, t_env *n);
+t_env	*new_env(char *env);
+char	**split_by_two(char *env, char c);
 #endif

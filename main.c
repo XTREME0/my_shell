@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/25 11:26:11 by ataai            ###   ########.fr       */
+/*   Updated: 2025/02/25 17:46:16 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	main(int argc, char **argv, char **env)
 	t_env	*my_env;
 
 	my_env = my_setenv(env);
-	print_env(my_env);
+	//print_env(my_env);
 	//while (1)
 	//{
 	//	prompt = readline("$");
@@ -150,6 +150,8 @@ int	main(int argc, char **argv, char **env)
 	//	printf("%s\n", prompt);
 	//	free(prompt);
 	//}
+	my_export_write(my_env, "a=hhh  b=lol   c= "); // still at risk of segfault etc needs to get fixed
+	print_env(my_env);
 	env_clear(my_env);
 	return (0);
 }
