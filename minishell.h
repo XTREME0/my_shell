@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/20 10:45:39 by ataai            ###   ########.fr       */
+/*   Updated: 2025/02/24 22:02:51 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,15 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include <limits.h>
+
+typedef struct s_env
+{
+	char		*key;
+	char		*val;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+int	print_env(t_env *env);
+void	ft_putstr(char *str);
 #endif

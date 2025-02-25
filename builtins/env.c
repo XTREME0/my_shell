@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 15:36:43 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/20 12:56:43 by ataai            ###   ########.fr       */
+/*   Created: 2025/02/24 10:42:46 by ataai             #+#    #+#             */
+/*   Updated: 2025/02/24 21:59:39 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	pwd(void)
+int	print_env(t_env *env)
 {
-	char	wd[PATH_MAX];
-	
-	getcwd(wd, PATH_MAX);
-	write(1, wd, ft_strlen(wd));
+	t_env	*tmp;
+
+	if (env == NULL)
+		return (-1);
+	tmp = env;
+	while (tmp)
+	{
+		ft_putstr(tmp->key);
+		ft_putstr("=");
+		ft_putstr(tmp->val);
+		ft_putstr("\n");
+		tmp = tmp->next;
+	}
 	return (0);
 }
