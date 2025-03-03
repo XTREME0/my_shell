@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:03:25 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/25 17:43:46 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/03 15:44:53 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	printf("hh\n");
 	while (tab[i])
 	{
 		free(tab[i]);
 		i++;
 	}
-	printf("lol\n");
 	free(tab);
 }
 
@@ -78,7 +76,7 @@ int	sanitize_key(char *key)
 		if (key[i] == '+')
 		{
 			if (key[i + 1] == '\0')
-				return (1);
+				return (key[i] = '\0', 1);
 			return (-1);
 		}
 		if (!ft_isalnum(key[i]))
@@ -96,6 +94,29 @@ void	env_error(char **pair)
 	write(1, "error hh ghleti or sumn\n", 24); //set correct mesage here
 }
 
+int	append_env(t_env **env, char **pair)
+{
+	t_env	*tmp;
+
+	tmp = *env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->key, pair[0]) == 0)
+		{
+			tmp->val = free_join(tmp->val, pair[1]);
+			return (free(pair[0]), free(pair), 0);
+		}
+		if (tmp->next == NULL)
+			break;
+		tmp = tmp->next;
+	}
+	tmp = add_env(pair);
+	if (tmp == NULL)
+		return (free(pair[0]), free(pair[1]), free(pair), -1);
+	env_add_back(env, tmp);
+	return (0);
+}
+
 int	my_export_write(t_env *env, char *arg)
 {
 	char	**pair;
@@ -109,7 +130,10 @@ int	my_export_write(t_env *env, char *arg)
 	i = 0;
 	while (args[i])
 	{
+	
+
 		pair = split_by_two(args[i], '=');
+		printf("0 = %s, 1 = %s\n", pair[0], pair[1]);
 		if (pair == NULL)
 			return (free_tab(args), -1);
 		flag = sanitize_key(pair[0]);
@@ -123,8 +147,8 @@ int	my_export_write(t_env *env, char *arg)
 		{
 			export_add_replace(&env, pair);
 		}
-//		else
-//			append_env(env, pair)
+		else
+			append_env(&env, pair);
 //		free(pair[0]);
 //		free(pair[1]);
 //		free(pair);
