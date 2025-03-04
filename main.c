@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/26 16:43:28 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/04 14:19:10 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,9 @@ int	main(int argc, char **argv, char **env)
 	//}
 	my_export_write(my_env, argv[1]);
 	print_export(my_env);
-	//print_env(my_env);
+//	print_env(my_env);
+//	unset(&my_env, argv[1]);
+//	print_env(my_env);
 	env_clear(my_env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/03 14:39:31 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/04 14:14:20 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ int	my_export_write(t_env *env, char *arg);
 void	env_add_back(t_env **lst, t_env *n);
 t_env	*new_env(char *env);
 char	**split_by_two(char *env, char c);
-int	print_export(t_env *env);
+void	print_export(t_env *env);
 char	*free_join(char *s1, char *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int	cd(char *str);
+int	pwd(void);
+int	unset(t_env **env, char *key);
+int	put_export(t_env *env);
 #endif

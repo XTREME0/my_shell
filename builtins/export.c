@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:03:25 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/03 15:44:53 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/04 14:42:31 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,75 @@ int	append_env(t_env **env, char **pair)
 	return (0);
 }
 
+void	set_flag(t_env *env, int f)
+{
+	while (env)
+	{
+		env->flag = f;
+		env = env->next;
+	}
+}
+
+int	node_lst_len(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (env)
+	{
+		i++;
+		env = env->next;
+	}
+	return (i);
+}
+
+void	print_export(t_env *env)
+{
+	t_env	*tmp;
+	t_env	*small;
+	int	i;
+
+	set_flag(env, 0);
+	i = node_lst_len(env);
+	while (i)
+	{
+		tmp = env;
+		while (tmp && tmp->flag)
+			tmp = tmp->next;
+		small = tmp;
+		while (tmp)
+		{
+			if (tmp->key && ft_strcmp(small->key, tmp->key) > 0 && tmp->flag == 0)
+				small = tmp;
+			tmp = tmp->next;
+		}
+		small->flag = 1;
+		put_export(small);
+		i--;
+	}
+}
+
+int	put_export(t_env *env)
+{
+	if (env == NULL)
+		return (-1);
+	if (env->key)
+	{
+		if (ft_strcmp(env->key, "_") == 0)
+			return (0);
+		ft_putstr("declare -x ");
+		ft_putstr(env->key);
+	}
+	if (env->val)
+	{
+		ft_putstr("=\"");
+		ft_putstr(env->val);
+		ft_putstr("\"");
+	}
+	ft_putstr("\n");
+	return (0);
+}
+
 int	my_export_write(t_env *env, char *arg)
 {
 	char	**pair;
@@ -133,7 +202,6 @@ int	my_export_write(t_env *env, char *arg)
 	
 
 		pair = split_by_two(args[i], '=');
-		printf("0 = %s, 1 = %s\n", pair[0], pair[1]);
 		if (pair == NULL)
 			return (free_tab(args), -1);
 		flag = sanitize_key(pair[0]);
@@ -144,14 +212,9 @@ int	my_export_write(t_env *env, char *arg)
 			continue;
 		}
 		else if (flag == 0)
-		{
 			export_add_replace(&env, pair);
-		}
 		else
 			append_env(&env, pair);
-//		free(pair[0]);
-//		free(pair[1]);
-//		free(pair);
 		i++;
 	}
 	return (free_tab(args), 0);
