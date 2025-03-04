@@ -6,18 +6,18 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:43:12 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/04 16:16:41 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/04 22:25:06 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//just absolute for now
-
 int	set_by_key(t_env **env, char *key, const char *val)
 {
 	char	**pair;
 
+	if (!env || !*env || !key || !val)
+		return (-1);
 	pair = malloc(sizeof(char *) * 2);
 	if (pair == NULL)
 		return (-1);
@@ -29,8 +29,19 @@ int	set_by_key(t_env **env, char *key, const char *val)
 		free(pair[1]);
 		free(pair);
 	}
-	export_add_replace(&env, pair);
+	export_add_replace(env, pair);
 	return (0);
+}
+
+char	*get_val(t_env *env, char *key)
+{
+	while (env)
+	{
+		if (ft_strcmp(env->key, key) == 0)
+			return (env->val);
+		env = env->next;
+	}
+	return (NULL);
 }
 
 int	cd(t_env **env, char *str)
@@ -40,7 +51,7 @@ int	cd(t_env **env, char *str)
 	if (str == NULL || chdir(str) == -1)
 		return (-1);
 	getcwd(wd, PATH_MAX);
+	set_by_key(env, "OLDPWD", get_val(*env, "PWD"));
 	set_by_key(env, "PWD", wd);
-	// to be continued
 	return (0);
 }

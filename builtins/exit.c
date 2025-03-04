@@ -6,13 +6,14 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:57:32 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/24 11:00:47 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/04 23:02:06 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	my_exit(int x)
+int	my_exit(t_env **env, int x)
 {
+	set_by_key(env, "?", ft_itoa(x));
 	exit(x);
 }
