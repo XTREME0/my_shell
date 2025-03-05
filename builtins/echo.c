@@ -6,16 +6,14 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:05:44 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/17 16:27:46 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 14:24:00 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
 int	echo(char *str, int option)
 {
-
 	if (str == NULL)
 		return (-1);
 	write(1, str, ft_strlen(str));

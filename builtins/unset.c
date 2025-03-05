@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:46:41 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/03 23:02:59 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 14:25:59 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	unset(t_env **env, char *key)
 	if (env == NULL || *env == NULL || key == NULL)
 		return (-1);
 	tmp = *env;
-	while(tmp)
+	while (tmp)
 	{
 		if (ft_strcmp(tmp->key, key) == 0)
 		{

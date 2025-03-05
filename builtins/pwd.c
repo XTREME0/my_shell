@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:36:43 by ataai             #+#    #+#             */
-/*   Updated: 2025/02/20 12:56:43 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 14:26:28 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	pwd(void)
 {
 	char	wd[PATH_MAX];
-	
+
 	getcwd(wd, PATH_MAX);
 	write(1, wd, ft_strlen(wd));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/04 23:01:13 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 15:50:48 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ int	pwd(void);
 int	unset(t_env **env, char *key);
 int	put_export(t_env *env);
 int	export_add_replace(t_env **env, char **pair);
-int	my_exit(t_env **env, int x);
+void	my_exit(int x);
 int	set_by_key(t_env **env, char *key, const char *val);
 char	*ft_itoa(int n);
+void	free_tab(char **tab);
+void	env_error(char **pair);
+void	set_flag(t_env *env, int f);
+int	append_env(t_env **env, char **pair);
+int	node_lst_len(t_env *env);
 #endif
