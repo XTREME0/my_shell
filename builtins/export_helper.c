@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:28:25 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/05 15:32:29 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 23:55:18 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	append_env(t_env **env, char **pair)
 			tmp->val = free_join(tmp->val, pair[1]);
 			return (free(pair[0]), free(pair), 0);
 		}
-		if (tmp->next == NULL)
-			break ;
 		tmp = tmp->next;
 	}
 	tmp = add_env(pair);

@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:42:46 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/04 14:43:53 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 23:36:56 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int	print_env(t_env *env)
 		if (tmp->val)
 		{
 			if (tmp->key)
+			{
 				ft_putstr(tmp->key);
-			ft_putstr("=");
-			ft_putstr(tmp->val);
-			ft_putstr("\n");
+				ft_putstr("=");
+				ft_putstr(tmp->val);
+				ft_putstr("\n");
+			}
 		}
 		tmp = tmp->next;
 	}

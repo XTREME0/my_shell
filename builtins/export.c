@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:03:25 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/05 16:08:54 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 23:51:13 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,6 @@ int	sanitize_key(char *key)
 	return (0);
 }
 
-void	check_flag(t_env **env, char **pair, int flag, int *i)
-{
-	else if (flag == 0)
-		export_add_replace(env, pair);
-	else
-		append_env(env, pair);
-	(*i)++;
-}
-
 int	my_export_write(t_env *env, char *arg)
 {
 	char	**pair;
@@ -99,14 +90,13 @@ int	my_export_write(t_env *env, char *arg)
 		if (pair == NULL)
 			return (free_tab(args), -1);
 		flag = sanitize_key(pair[0]);
-
 		if (flag == -1)
-		{
 			env_error(pair);
-			i++;
-			continue ;
-		}
-		check_flag(&env, pair, flag, &i); // to be continued
+		else if (flag == 0)
+			export_add_replace(&env, pair);
+		else
+			append_env(&env, pair);
+		i++;
 	}
 	return (free_tab(args), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:46:41 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/05 14:25:59 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 23:45:37 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	unset(t_env **env, char *key)
 				tmp->next->prev = tmp->prev;
 			free(tmp->key);
 			free(tmp->val);
+			break ;
 		}
 		tmp = tmp->next;
 	}

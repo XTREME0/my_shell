@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/05 15:50:48 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/05 23:18:53 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	env_error(char **pair);
 void	set_flag(t_env *env, int f);
 int	append_env(t_env **env, char **pair);
 int	node_lst_len(t_env *env);
+t_env	*add_env(char **pair);
 #endif
