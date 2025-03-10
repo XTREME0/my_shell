@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/05 23:18:53 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/06 16:26:43 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ typedef struct s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
+typedef	struct s_cmd
+{
+	char	*cmd;
+	char	**args;
+	int		fd_in;
+	int		fd_out;
+	int		is_append;
+	int		is_heredoc;
+	char	*heredoc_delim;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+}	t_cmd;
 int	print_env(t_env *env);
 void	ft_putstr(char *str);
 int	my_export_write(t_env *env, char *arg);
@@ -53,4 +65,7 @@ void	set_flag(t_env *env, int f);
 int	append_env(t_env **env, char **pair);
 int	node_lst_len(t_env *env);
 t_env	*add_env(char **pair);
+t_cmd	*add_cmd(char *str_cmd, char **args);
+void	cmd_add_back(t_cmd **lst, t_cmd *new);
+t_cmd	*cmdlast(t_cmd *lst);
 #endif
