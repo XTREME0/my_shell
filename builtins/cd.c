@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:43:12 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/07 01:58:58 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:26:38 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	set_by_key(t_env **env, char *key, const char *val)
 char	*get_val(t_env *env, char *key)
 {
 	if (key == NULL)
-		return (-1);
+		return (NULL);
 	while (env)
 	{
 		if (ft_strcmp(env->key, key) == 0)

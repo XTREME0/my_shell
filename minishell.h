@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/06 16:26:43 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:37:48 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "libft/libft.h"
+/* # include "libft/libft.h"*/
 
-typedef struct s_env
+/*typedef struct s_env
 {
 	int		flag;	
 	char		*key;
 	char		*val;
 	struct s_env	*next;
 	struct s_env	*prev;
-}	t_env;
-typedef	struct s_cmd
+}	t_env;*/
+/*typedef	struct s_cmd
 {
 	char	*cmd;
 	char	**args;
@@ -41,7 +41,7 @@ typedef	struct s_cmd
 	char	*heredoc_delim;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
-}	t_cmd;
+}	t_cmd;*/
 int	print_env(t_env *env);
 void	ft_putstr(char *str);
 int	my_export_write(t_env *env, char *arg);
@@ -65,7 +65,7 @@ void	set_flag(t_env *env, int f);
 int	append_env(t_env **env, char **pair);
 int	node_lst_len(t_env *env);
 t_env	*add_env(char **pair);
-t_cmd	*add_cmd(char *str_cmd, char **args);
+t_cmd	*add_cmd(char **cmd_args);
 void	cmd_add_back(t_cmd **lst, t_cmd *new);
 t_cmd	*cmdlast(t_cmd *lst);
 #endif
