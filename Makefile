@@ -1,7 +1,7 @@
 NAME	:= minishell
 
 CFLAGS	:= -lreadline #-Wall -Werror -Wextra 
-SRCS	:= main.c builtins/* parsing/* libft/libft.a ft_printf/libftprintf.a
+SRCS	:= main.c free_join.c exec_cmds.c builtins/* parsing/* libft/libft.a ft_printf/libftprintf.a
 
 all	: ft_printf $(NAME) 
 

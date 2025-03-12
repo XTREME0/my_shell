@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/12 22:41:13 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/03/12 23:06:43 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,52 +33,6 @@ typedef struct s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
-
-
-/*typedef	struct s_cmd
-{
-	char	*cmd;
-	char	**args;
-	int		fd_in;
-	int		fd_out;
-	int		is_append;
-	int		is_heredoc;
-	char	*heredoc_delim;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}	t_cmd;*/
-
-char	*get_val(t_env *env, char *key);
-int	print_env(t_env *env);
-void	ft_putstr(char *str);
-int	my_export_write(t_env *env, char *arg);
-void	env_add_back(t_env **lst, t_env *n);
-t_env	*new_env(char *env);
-char	**split_by_two(char *env, char c);
-void	print_export(t_env *env);
-char	*free_join(char *s1, char *s2);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-int	cd(t_env **env, char *str);
-int	pwd(void);
-int	unset(t_env **env, char *key);
-int	put_export(t_env *env);
-int	export_add_replace(t_env **env, char **pair);
-void	my_exit(int x);
-int	set_by_key(t_env **env, char *key, const char *val);
-char	*ft_itoa(int n);
-void	free_tab(char **tab);
-void	env_error(char **pair);
-void	set_flag(t_env *env, int f);
-int	append_env(t_env **env, char **pair);
-int	node_lst_len(t_env *env);
-t_env	*add_env(char **pair);
-// t_cmd	*add_cmd(char **cmd_args);
-// void	cmd_add_back(t_cmd **lst, t_cmd *new);
-// t_cmd	*cmdlast(t_cmd *lst);
-
-// Parsin 3la 9ed l7al
-
-# define WHITE_SP "\r\t\v\f\n "
 
 typedef enum token_types
 {
@@ -127,6 +81,53 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
+
+/*typedef	struct s_cmd
+{
+	char	*cmd;
+	char	**args;
+	int		fd_in;
+	int		fd_out;
+	int		is_append;
+	int		is_heredoc;
+	char	*heredoc_delim;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+}	t_cmd;*/
+
+char	*get_val(t_env *env, char *key);
+int	print_env(t_env *env);
+void	ft_putstr(char *str);
+int	my_export_write(t_env *env, char *arg);
+void	env_add_back(t_env **lst, t_env *n);
+t_env	*new_env(char *env);
+char	**split_by_two(char *env, char c);
+void	print_export(t_env *env);
+char	*free_join(char *s1, char *s2);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int	cd(t_env **env, char *str);
+int	pwd(void);
+int	unset(t_env **env, char *key);
+int	put_export(t_env *env);
+int	export_add_replace(t_env **env, char **pair);
+void	my_exit(int x);
+int	set_by_key(t_env **env, char *key, const char *val);
+char	*ft_itoa(int n);
+void	free_tab(char **tab);
+void	env_error(char **pair);
+void	set_flag(t_env *env, int f);
+int	append_env(t_env **env, char **pair);
+int	node_lst_len(t_env *env);
+t_env	*add_env(char **pair);
+int	exec_setup(t_cmd *cmd_node);
+// t_cmd	*add_cmd(char **cmd_args);
+// void	cmd_add_back(t_cmd **lst, t_cmd *new);
+// t_cmd	*cmdlast(t_cmd *lst);
+
+// Parsin 3la 9ed l7al
+
+# define WHITE_SP "\r\t\v\f\n "
+
 
 t_cmd	*ft_newcmd(void);
 t_cmd	*ft_firstcmd(t_cmd *cmd);
