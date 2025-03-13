@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/12 23:10:17 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/13 13:57:10 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int	main(int argc, char **argv, char **env)
 	char	*prompt;
 	t_env	*my_env;
 	t_cmd	*cmd_node;
+	int	i;
 
 	my_env = my_setenv(env);
 	cmd_node = NULL;
@@ -152,8 +153,20 @@ int	main(int argc, char **argv, char **env)
 		cmd_node = construct_cmds(prompt, &my_env);
 		if (cmd_node == NULL)
 			ft_printf("bruuuuuuuuuuuuuuuuuh\n");
+		//while (cmd_node)
+		//{
+		//	i = 0;
+		//	printf("<----------------------->\n");
+		//	while (cmd_node->kwargs[i])
+		//	{
+		//		printf("->%s\n", cmd_node->kwargs[i]);
+		//		i++;
+		//	}
+		//	cmd_node = cmd_node->next;
+		//}
 		//exec_cmds(&cmd_node);
-		exec_setup(cmd_node);
+		exec_setup(&cmd_node);
+		//ft_clearcmds(&cmd_node);
 		free(prompt);
 	}
 	env_clear(my_env);

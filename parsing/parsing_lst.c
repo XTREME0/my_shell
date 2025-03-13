@@ -50,7 +50,7 @@ void	ft_delcmd(t_cmd *cmd)
 	free(cmd);
 }
 
-void	ft_clearcmds(t_cmd	**head)
+void	ft_clearcmds(t_cmd **head)
 {
 	t_cmd	*tmp;
 

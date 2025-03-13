@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/12 23:06:43 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/13 12:56:37 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ void	set_flag(t_env *env, int f);
 int	append_env(t_env **env, char **pair);
 int	node_lst_len(t_env *env);
 t_env	*add_env(char **pair);
-int	exec_setup(t_cmd *cmd_node);
+int	exec_setup(t_cmd **cmd_node);
+int	exec_cmd(t_cmd *cmd_node);
 // t_cmd	*add_cmd(char **cmd_args);
 // void	cmd_add_back(t_cmd **lst, t_cmd *new);
 // t_cmd	*cmdlast(t_cmd *lst);
