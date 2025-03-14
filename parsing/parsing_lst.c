@@ -37,28 +37,32 @@ void	ft_delcmd(t_cmd *cmd)
 {
 	size_t	i;
 
+	if (cmd == NULL)
+		return ;
 	i = 0;
-	if (cmd->fd_in > 1)
+	if (cmd->fd_in > 0)
 		close(cmd->fd_in);
-	if (cmd->fd_out > 1)
-		close(cmd->fd_out);
+	//if (cmd->fd_out > 0)
+	//	close(cmd->fd_out);
 	free_table(cmd->kwargs);
-	if (cmd->heredoc_file)
-		free(cmd->heredoc_file);
-	if (cmd->delim)
-		free(cmd->delim);
+	//if (cmd->heredoc_file)
+	//	free(cmd->heredoc_file);
+	//if (cmd->delim)
+	//	free(cmd->delim);
 	free(cmd);
 }
 
 void	ft_clearcmds(t_cmd **head)
 {
 	t_cmd	*tmp;
-
-	while ((*head))
+	
+	if (head == NULL || *head == NULL)
+		return ;
+	tmp = *head;
+	while (tmp)
 	{
-		tmp = (*head);
-		(*head) = (*head)->next;
 		ft_delcmd(tmp);
+		tmp = tmp->next;
 	}
 }
 

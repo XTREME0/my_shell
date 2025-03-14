@@ -45,6 +45,7 @@ t_cmd    *construct_cmds(char *str, t_env **env)
         }
         i++;
     }
+    free_table(split_cmds);
     while (cmds->prev)
         cmds = cmds->prev;
     return (cmds);
