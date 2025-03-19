@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 14:50:26 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/19 16:05:22 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*free_join(char *s1, char *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int	cd(t_env **env, char *str);
 int	pwd(void);
-int	unset(t_env **env, char *key);
+int	unset(t_cmd * cmd, t_env **env);
 int	put_export(t_env *env);
 int	export_add_replace(t_env **env, char **pair);
 void	my_exit(t_cmd *cmd, t_env **env);

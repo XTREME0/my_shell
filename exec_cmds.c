@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 14:51:12 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/19 16:09:44 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	exec_builtin(t_cmd *cmd_node, t_env **my_env)
 		return (my_exit(cmd_node, my_env), 0);
 	else if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "export") == 0)
 		return (my_export(cmd_node, *my_env), 0);
+	else if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "unset") == 0)
+		return (unset(cmd_node, my_env), 0);
 	return (1);
 }
 

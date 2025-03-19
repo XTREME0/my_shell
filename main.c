@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 14:04:22 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/19 15:37:24 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ int	main(int argc, char **argv, char **env)
 			return (-1);
 		exec_setup(&cmd_node, &my_env);
 		ft_clearcmds(&cmd_node);
-		print_env(my_env);
 		free(prompt);
 	}
 	env_clear(my_env);
