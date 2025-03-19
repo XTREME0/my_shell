@@ -44,7 +44,6 @@ typedef struct s_cmd
 	char			**kwargs;
 	int				fd_in;
 	int				fd_out;
-	int				heredoc_fd;
 	char			*heredoc_file;
 	char			*delim;
 	struct s_cmd	*next;
@@ -74,6 +73,7 @@ void	assign_words(t_tokens *toks);
 t_tokens	*input_split(char *str);
 int			get_word(char *s, size_t *i, t_tokens **head);
 int			get_redir(char *s, size_t *i, t_tokens **head);
+t_tokens	*tokenize(char *str);
 
 // cmds list
 t_cmd	*ft_newcmd(void);
@@ -83,7 +83,8 @@ void	ft_clearcmds(t_cmd	**head);
 t_cmd	*ft_firstcmd(t_cmd *cmd);
 
 // cmds
-int		set_args(t_tokens *toks, t_cmd *cmds);
+t_cmd	*create_nodes(t_tokens *toks);
+int		set_args(t_cmd *cmds, t_tokens *toks);
 
 // files
 

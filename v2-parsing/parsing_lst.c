@@ -11,7 +11,7 @@ t_cmd	*ft_newcmd(void)
 	new->fd_in = 0;
 	new->fd_out = 1;
 	new->heredoc_file = NULL;
-	new->heredoc_fd = -1;
+	new->delim = NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

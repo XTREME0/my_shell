@@ -48,6 +48,8 @@ int	get_word(char *s, size_t *i, t_tokens **head)
 	char		*word;
 	t_tokens	*new;
 
+	if (is_redir(s[*i]))
+		return (1);
 	start = *i;
 	while (s[*i] && !is_redir(s[*i]) && !ft_isspace(s[*i]))
 	{
