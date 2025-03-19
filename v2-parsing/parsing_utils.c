@@ -5,6 +5,7 @@ t_cmd	*create_nodes(t_tokens *toks)
 	t_cmd	*cmds;
 	t_cmd	*new;
 
+	cmds = NULL;
 	while (toks)
 	{
 		if (toks->tok_type == PIPE)

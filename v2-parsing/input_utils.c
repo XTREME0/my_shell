@@ -6,8 +6,11 @@ void	skip_spaces(char *s, size_t *i)
 		*i += 1;
 }
 
-static void	skip_q_content(char *s, size_t *i, char quote)
+static void	skip_q_content(char *s, size_t *i)
 {
+	char	quote;
+
+	quote = s[*i];
 	*i += 1;
 	while (s[*i] && s[*i] != quote)
 		*i += 1;
@@ -54,10 +57,7 @@ int	get_word(char *s, size_t *i, t_tokens **head)
 	while (s[*i] && !is_redir(s[*i]) && !ft_isspace(s[*i]))
 	{
 		if (is_quote(s[*i]))
-		{
-			quote = s[*i];
-			skip_q_content(s, i, quote);
-		}
+			skip_q_content(s, i);
 		*i += 1;
 	}
 	word = ft_substr(s, start, *i - start);

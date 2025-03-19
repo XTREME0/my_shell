@@ -25,12 +25,6 @@ typedef enum token_types
 	EXPAND
 }	t_tok_types;
 
-typedef struct s_inp
-{
-	char			*inp;
-	struct s_inp	*next;
-}	t_inp;
-
 typedef struct s_tokens
 {
 	int				tok_type;

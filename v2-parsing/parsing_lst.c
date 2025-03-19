@@ -31,8 +31,8 @@ void	ft_addcmd(t_cmd **head, t_cmd *new)
 	tmp = (*head);
 	while (tmp->next)
 		tmp = tmp->next;
-	new->prev = tmp;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_delcmd(t_cmd *cmd)
