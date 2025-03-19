@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/13 21:17:27 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/19 14:51:12 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,24 @@
 //	
 //}
 
-//int	exec_builtin(t_cmd *cmd_node)
-//{
-//	if (cmd_node == NULL || cmd_node->cmd_args == NULL)
-//		return (-1);
-//	while (cmd_node
-//}
+int	exec_builtin(t_cmd *cmd_node, t_env **my_env)
+{
+	if (cmd_node == NULL || cmd_node->kwargs == NULL)
+		return (-1);
+	if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "cd") == 0)
+		return (cd(my_env, cmd_node->kwargs[1]), 0);
+	else if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "pwd") == 0)
+		return (pwd(), 0);
+	else if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "env") == 0)
+		return (print_env(*my_env), 0);
+	else if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "echo") == 0)
+		return (echo(cmd_node), 0);
+	else if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "exit") == 0)
+		return (my_exit(cmd_node, my_env), 0);
+	else if (cmd_node->kwargs[0] && ft_strcmp(cmd_node->kwargs[0], "export") == 0)
+		return (my_export(cmd_node, *my_env), 0);
+	return (1);
+}
 
 char	**get_path(t_env *env)
 {
@@ -71,23 +83,23 @@ char	*add_path_tocmd(char *cmd, t_env *my_env)
 	return (free_table(path), free(cmd), NULL);
 }
 
-int	exec_cmd(t_cmd *cmd_node, t_env *my_env)
+int	exec_cmd(t_cmd *cmd_node, t_env **my_env)
 {
 	int	f;
-//	int	builtin;
+	int	builtin;
 
 	if (cmd_node == NULL)
 		return (-1);
-	//builtin = exec_builtin(cmd_node);
-//	if (builtin != 1)
-//		return (builtin);
+	builtin = exec_builtin(cmd_node, my_env);
+	if (builtin != 1)
+		return (builtin);
 	f = fork();
 	if (f == 0)
 	{
 		if (dup2(cmd_node->fd_in, 0) < 0 || dup2(cmd_node->fd_out, 1) < 0)
 			return (-1);
 		if (access(cmd_node->kwargs[0], X_OK) != 0)
-			cmd_node->kwargs[0] = add_path_tocmd(cmd_node->kwargs[0], my_env);
+			cmd_node->kwargs[0] = add_path_tocmd(cmd_node->kwargs[0], *my_env);
 		if (cmd_node->kwargs[0] == NULL)
 			write(2, "command not found\n", 18); //add the correct error message here and clear mem to exit
 		execve(cmd_node->kwargs[0], cmd_node->kwargs, NULL); //end set as NULL for now. to be changed after!
@@ -99,7 +111,7 @@ int	exec_cmd(t_cmd *cmd_node, t_env *my_env)
 	return (0);
 }
 
-int	exec_setup(t_cmd **cmd_node, t_env *my_env)
+int	exec_setup(t_cmd **cmd_node, t_env **my_env)
 {
 	int	pfd[2];
 	t_cmd	*cmd;

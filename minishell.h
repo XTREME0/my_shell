@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/13 21:18:26 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/19 14:50:26 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
-
 /*typedef	struct s_cmd
 {
 	char	*cmd;
@@ -110,7 +109,7 @@ int	pwd(void);
 int	unset(t_env **env, char *key);
 int	put_export(t_env *env);
 int	export_add_replace(t_env **env, char **pair);
-void	my_exit(int x);
+void	my_exit(t_cmd *cmd, t_env **env);
 int	set_by_key(t_env **env, char *key, const char *val);
 char	*ft_itoa(int n);
 void	free_tab(char **tab);
@@ -119,8 +118,11 @@ void	set_flag(t_env *env, int f);
 int	append_env(t_env **env, char **pair);
 int	node_lst_len(t_env *env);
 t_env	*add_env(char **pair);
-int	exec_setup(t_cmd **cmd_node, t_env *my_env);
-int	exec_cmd(t_cmd *cmd_node, t_env *my_env);
+int	exec_setup(t_cmd **cmd_node, t_env **my_env);
+int	exec_cmd(t_cmd *cmd_node, t_env **my_env);
+int	echo(t_cmd *cmd);
+void	env_clear(t_env *e);
+int     my_export(t_cmd *cmd_node, t_env *my_env);
 // t_cmd	*add_cmd(char **cmd_args);
 // void	cmd_add_back(t_cmd **lst, t_cmd *new);
 // t_cmd	*cmdlast(t_cmd *lst);

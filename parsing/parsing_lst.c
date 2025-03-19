@@ -54,6 +54,7 @@ void	ft_delcmd(t_cmd *cmd)
 
 void	ft_clearcmds(t_cmd **head)
 {
+	t_cmd	*nxt;
 	t_cmd	*tmp;
 	
 	if (head == NULL || *head == NULL)
@@ -61,8 +62,9 @@ void	ft_clearcmds(t_cmd **head)
 	tmp = *head;
 	while (tmp)
 	{
+		nxt = tmp->next;
 		ft_delcmd(tmp);
-		tmp = tmp->next;
+		tmp = nxt;
 	}
 }
 

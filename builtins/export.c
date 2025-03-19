@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:03:25 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/05 23:51:13 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/19 14:46:05 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,13 @@ int	my_export_write(t_env *env, char *arg)
 		i++;
 	}
 	return (free_tab(args), 0);
+}
+
+int	my_export(t_cmd *cmd_node, t_env *my_env)
+{
+	int	i;
+
+	if (cmd_node->kwargs[1] == NULL)
+		print_export(my_env);
+	return (0);
 }

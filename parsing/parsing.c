@@ -25,8 +25,12 @@ t_cmd    *construct_cmds(char *str, t_env **env)
     char    **split_cmds;
     int        i;
 
+    if (str == NULL || env == NULL || *env == NULL)
+	    return (NULL);
     cmds = NULL;
     split_cmds = ft_split(str, '|');
+    if (split_cmds == NULL)
+	    return (NULL);
     i = 0;
     while (split_cmds[i])
     {
