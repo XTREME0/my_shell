@@ -33,6 +33,14 @@ typedef struct s_tokens
 	struct s_tokens	*prev;
 }	t_tokens;
 
+typedef struct t_redirs
+{
+	int		fd;
+	int		type;
+	char	*filename;
+	char	*delim;
+}	t_redirs;
+
 typedef struct s_cmd
 {
 	char			**kwargs;
@@ -103,5 +111,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
 char	*ft_utoa(unsigned int n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+// redirs
+void	redir_pipe(t_cmd *cmds);
 
 #endif

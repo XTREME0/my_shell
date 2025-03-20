@@ -13,6 +13,7 @@ t_cmd	*construct_cmds(char *str)
 		return (ft_cleartoks(&toks), NULL);
 	if (!set_args(cmds, toks))
 		return (ft_cleartoks(&toks), NULL);
+	void	redir_pipe(cmds);
 	return (ft_cleartoks(&toks), cmds);
 }
 
