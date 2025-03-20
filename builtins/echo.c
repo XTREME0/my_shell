@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:05:44 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/18 17:14:45 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/20 00:34:03 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	echo(t_cmd *cmd)
 {
 	int	option;
+	int	i;
 
 	if (cmd == NULL)
 		return (-1);
@@ -24,9 +25,16 @@ int	echo(t_cmd *cmd)
 	{
 		if (ft_strcmp(cmd->kwargs[1], "-n") == 0)
 			option = 1;
-		write(1, cmd->kwargs[option + 1], ft_strlen(cmd->kwargs[option + 1]));
+		i = option + 1;
+		while (cmd->kwargs[i])
+		{
+			write(1, cmd->kwargs[i], ft_strlen(cmd->kwargs[i]));
+			i++;
+			if (cmd->kwargs[i])
+				write(1, " ", 1);
+		}
 	}
-	if (!option)
+	if (option == 0)
 		write(1, "\n", 1);
 	return (0);
 }

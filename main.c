@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 15:37:24 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/20 00:42:10 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,16 @@ int	main(int argc, char **argv, char **env)
 	cmd_node = NULL;
 	while (1)
 	{
+		while (wait(NULL) != -1)
+			;
 		prompt = readline("$");
 		if (prompt == NULL)
 			break ;
+		if (prompt[0] == 0)
+		{
+			free(prompt);
+			continue ;
+		}
 		cmd_node = construct_cmds(prompt, &my_env);
 		if (cmd_node == NULL)
 			return (-1);

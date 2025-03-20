@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 16:05:22 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/20 00:42:45 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include "ft_printf/ft_printf.h"
+#include <sys/wait.h>
 /* # include "libft/libft.h"*/
 
 typedef struct s_env

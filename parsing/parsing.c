@@ -34,13 +34,17 @@ t_cmd    *construct_cmds(char *str, t_env **env)
     i = 0;
     while (split_cmds[i])
     {
-        ft_addcmd(&cmds, ft_newcmd());
+        ft_addcmd(&cmds, ft_newcmd()); // risky, check for failure
+	if (cmds == NULL)
+		return (NULL); // not freeing for now
         i++;
     }
     i = 0;
     while (split_cmds[i])
     {
         cmds->kwargs = ft_split(split_cmds[i], ' ');
+	if (cmds->kwargs == NULL)
+		return (NULL);
         if (split_cmds[i + 1])
         {
             cmds->fd_out = -1;
