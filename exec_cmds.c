@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 16:09:44 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/23 16:33:21 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,21 @@ int	exec_cmd(t_cmd *cmd_node, t_env **my_env)
 			cmd_node->kwargs[0] = add_path_tocmd(cmd_node->kwargs[0], *my_env);
 		if (cmd_node->kwargs[0] == NULL)
 			write(2, "command not found\n", 18); //add the correct error message here and clear mem to exit
+		if (cmd_node->prev)
+		{
+			close(cmd_node->prev->fd_out);
+			close(cmd_node->prev->fd_in);
+		}
+		if (cmd_node->next)
+		{
+			close(cmd_node->next->fd_out);
+			close(cmd_node->next->fd_in);
+		}
 		execve(cmd_node->kwargs[0], cmd_node->kwargs, NULL); //end set as NULL for now. to be changed after!
 		printf("execve makhdmatch hh\n\n"); // remove
 		//my_close(1, 0, -1, -1);
-		close(1);
-		close(0);
+		//close(1);
+		//close(0);
 	}
 	return (0);
 }
