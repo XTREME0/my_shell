@@ -23,3 +23,18 @@ t_cmd	*create_nodes(t_tokens *toks)
 	ft_addcmd(&cmds, new);
 	return (cmds);
 }
+
+void	del_other_cmds(t_cmd *cmd)
+{
+	t_cmd	*prev;
+	t_cmd	*tmp;
+
+	ft_clearcmds(&cmd->next);
+	prev = cmd->prev;
+	while (prev)
+	{
+		tmp = prev;
+		ft_delcmd(tmp);
+		prev = prev->prev;
+	}
+}

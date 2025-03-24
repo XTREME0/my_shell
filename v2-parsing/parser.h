@@ -68,6 +68,8 @@ void	ft_firsttok(t_tokens **head);
 // tokenizing
 void	assign_redirs(t_tokens *toks);
 void	assign_files(t_tokens *toks);
+void	assign_expans(t_tokens *toks);
+int		remove_quote(t_tokens *toks);
 void	assign_cmds(t_tokens *toks);
 void	assign_words(t_tokens *toks);
 
@@ -75,6 +77,7 @@ void	assign_words(t_tokens *toks);
 t_tokens	*input_split(char *str);
 int			get_word(char *s, size_t *i, t_tokens **head);
 int			get_redir(char *s, size_t *i, t_tokens **head);
+void		skip_q_content(char *s, size_t *i);
 t_tokens	*tokenize(char *str);
 
 // cmds list
@@ -96,11 +99,13 @@ void	open_append(char *filename, t_cmd **cmd);
 void	set_pipe(t_cmd **cmd);
 int		open_heredoc(char *delim, t_cmd **cmd);
 
-// ??
+// utils
 void	skip_spaces(char *s, size_t *i);
 int		ft_isspace(char c);
 int		is_redir(char c);
 int		is_quote(char c);
+int		has_quotes(char *str);
+int		is_expan(char *val);
 
 //remove these
 char	**ft_split(char const *s, char c);

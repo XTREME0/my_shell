@@ -28,6 +28,11 @@ void	assign_files(t_tokens *toks)
 			if (toks->next)
 				toks->next->tok_type = FILES;
 		}
+		if (toks->tok_type == HEREDOC)
+		{
+			if (toks->next)
+				toks->next->tok_type = DELIM;
+		}
 		toks = toks->next;
 	}
 }
@@ -68,4 +73,11 @@ void	assign_words(t_tokens *toks)
 }
 
 void	assign_expans(t_tokens *toks)
-{}
+{
+	while (toks)
+	{
+		if (!toks->tok_type && is_expan(toks->tok_val))
+			toks->tok_type = EXPAND;
+		toks = toks->next;
+	}
+}

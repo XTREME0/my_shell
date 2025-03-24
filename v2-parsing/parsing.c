@@ -13,7 +13,7 @@ t_cmd	*construct_cmds(char *str)
 		return (ft_cleartoks(&toks), NULL);
 	if (!set_args(cmds, toks))
 		return (ft_cleartoks(&toks), NULL);
-	void	redir_pipe(cmds);
+	redir_pipe(cmds);
 	return (ft_cleartoks(&toks), cmds);
 }
 
@@ -38,16 +38,16 @@ int main(int ac, char **av, char **env)
 	char *str = readline("$ ");
 	t_cmd	*cmds = construct_cmds(str);
 	t_cmd	*head = cmds;
-	while (cmds)
-	{
-		for (int i = 0; cmds->kwargs[i]; i++)
-		{
-			printf("%s ", cmds->kwargs[i]);
-		}
-		// printf("%s ", cmds->kwargs[0]);
-		printf("\n");
-		cmds = cmds->next;
-	}
+	// while (cmds)
+	// {
+	// 	for (int i = 0; cmds->kwargs[i]; i++)
+	// 	{
+	// 		printf("%s ", cmds->kwargs[i]);
+	// 	}
+	// 	// printf("%s ", cmds->kwargs[0]);
+	// 	printf("\n");
+	// 	cmds = cmds->next;
+	// }
 	ft_clearcmds(&head);
 	free(str);
 }

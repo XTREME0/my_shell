@@ -6,7 +6,7 @@ void	skip_spaces(char *s, size_t *i)
 		*i += 1;
 }
 
-static void	skip_q_content(char *s, size_t *i)
+void	skip_q_content(char *s, size_t *i)
 {
 	char	quote;
 
