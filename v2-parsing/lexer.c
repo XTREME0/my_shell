@@ -19,10 +19,10 @@ t_tokens	*tokenize(char *str)
 	// 	return (ft_cleartoks(&toks), NULL);
 	assign_cmds(toks);
 	assign_words(toks);
-	while (toks)
-	{
-		printf("%d\n", toks->tok_type);
-		toks = toks->next;
-	}
+	// while (toks)
+	// {
+	// 	printf("%d\n", toks->tok_type);
+	// 	toks = toks->next;
+	// }
 	return (toks);
 }
