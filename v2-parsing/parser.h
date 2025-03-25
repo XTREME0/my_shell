@@ -108,14 +108,7 @@ int		has_quotes(char *str);
 int		is_expan(char *val);
 
 //remove these
-char	**ft_split(char const *s, char c);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	*ft_strdup(const char *s1);
-int		ft_strcmp(char *str1, char *str2);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *s);
 char	*ft_utoa(unsigned int n);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // redirs
 void	redir_pipe(t_cmd *cmds);
