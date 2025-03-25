@@ -11,3 +11,10 @@ void	redir_pipe(t_cmd *cmds)
 		cmds = cmds->next;
 	}
 }
+
+int	open_redirs(t_cmd *cmd, t_tokens *toks)
+{
+	t_cmd	*head;
+
+	return (1);
+}

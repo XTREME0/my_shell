@@ -11,10 +11,10 @@ t_tokens	*tokenize(char *str)
 	assign_files(toks);
 	assign_expans(toks);
 	assign_cmds(toks);
-	// replace_export(toks);
 	if (!remove_quote(toks))
 		return (ft_cleartoks(&toks), NULL);
 	assign_words(toks);
+	// replace_export(toks);
 	// if (!expand(toks))
 	// 	return (ft_cleartoks(&toks), NULL);
 	assign_cmds(toks);

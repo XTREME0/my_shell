@@ -119,5 +119,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // redirs
 void	redir_pipe(t_cmd *cmds);
+int	open_redirs(t_cmd *cmd, t_tokens *toks);
 
 #endif

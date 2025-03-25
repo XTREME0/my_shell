@@ -14,6 +14,8 @@ t_cmd	*construct_cmds(char *str)
 	if (!set_args(cmds, toks))
 		return (ft_cleartoks(&toks), NULL);
 	redir_pipe(cmds);
+	if (!open_redirs(cmds, toks))
+		return (ft_cleartoks(&toks), NULL);
 	return (ft_cleartoks(&toks), cmds);
 }
 
