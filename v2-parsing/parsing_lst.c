@@ -11,7 +11,6 @@ t_cmd	*ft_newcmd(void)
 	new->fd_in = 0;
 	new->fd_out = 1;
 	new->heredoc_file = NULL;
-	new->delim = NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -47,8 +46,6 @@ void	ft_delcmd(t_cmd *cmd)
 	free_table(cmd->kwargs);
 	if (cmd->heredoc_file)
 		free(cmd->heredoc_file);
-	if (cmd->delim)
-		free(cmd->delim);
 	free(cmd);
 }
 

@@ -33,12 +33,12 @@ typedef struct s_tokens
 	struct s_tokens	*prev;
 }	t_tokens;
 
-typedef struct t_redirs
+typedef struct s_redirs
 {
 	int		fd;
-	int		type;
 	char	*filename;
 	char	*delim;
+	struct s_redirs	*next;
 }	t_redirs;
 
 typedef struct s_cmd
@@ -47,7 +47,6 @@ typedef struct s_cmd
 	int				fd_in;
 	int				fd_out;
 	char			*heredoc_file;
-	char			*delim;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
@@ -119,6 +118,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // redirs
 void	redir_pipe(t_cmd *cmds);
-int	open_redirs(t_cmd *cmd, t_tokens *toks);
+int		open_redirs(t_cmd *cmd, t_tokens *toks);
+
+// redirs list
+t_redirs	*ft_newredir(char *filename);
+void	ft_addredir(t_redirs **head, t_redirs *new);
+void	ft_clearredir(t_redirs **head);
+void	clear_n_keep_redir(t_redirs **head, t_redirs *keep);
+t_redirs	*ft_lastredir(t_redirs	*head);
 
 #endif

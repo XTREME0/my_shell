@@ -8,6 +8,12 @@ t_cmd	*construct_cmds(char *str)
 	toks = tokenize(str);
 	if (!toks)
 		return (NULL);
+	// while (toks)
+	// {
+	// 	printf("%d\n", toks->tok_type);
+	// 	toks = toks->next;
+	// }
+	// exit(0);
 	cmds = create_nodes(toks);
 	if (!cmds)
 		return (ft_cleartoks(&toks), NULL);
