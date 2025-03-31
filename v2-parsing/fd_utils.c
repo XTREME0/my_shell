@@ -36,7 +36,7 @@ int	open_any(t_redirs *redir, t_cmd *cmd, t_redirs *in, t_redirs *out)
 {
 	int	fd;
 
-	fd = open(redir->filename, redir->perm, 0777);
+	fd = open(redir->filename, redir->perm, 0644);
 	if (fd < 0)
 		printf(FD_ERR, redir->filename, strerror(errno));
 	if (redir->io)

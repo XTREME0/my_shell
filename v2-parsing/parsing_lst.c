@@ -45,7 +45,10 @@ void	ft_delcmd(t_cmd *cmd)
 		close(cmd->fd_out);
 	free_table(cmd->kwargs);
 	if (cmd->heredoc_file)
+	{
+		unlink(cmd->heredoc_file);
 		free(cmd->heredoc_file);
+	}
 	free(cmd);
 }
 
