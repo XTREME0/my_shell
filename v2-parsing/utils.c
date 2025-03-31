@@ -4,8 +4,10 @@ void	free_table(char **strs)
 {
 	size_t	i;
 
+	if (!strs)
+		return ;
 	i = 0;
-	while (strs[i])
+	while (strs[i] != NULL)
 	{
 		free(strs[i]);
 		i++;
@@ -30,9 +32,8 @@ char	*custom_join(char *s1, char *s2)
 	ptr = (char *)malloc(l1 + l2 + 1);
 	if (ptr == NULL)
 		return (NULL);
-	ptr[0] = '\0';
-	ft_strlcat(ptr, s1, l1 + 1);
-	ft_strlcat(ptr, s2, l1 + l2 + 1);
+	ft_strlcpy(ptr, s1, l1 + 1);
+	ft_strlcpy(ptr + l1, s2, l2 + 1);
 	return (ptr);
 }
 

@@ -1,6 +1,6 @@
 #include "parser.h"
 
-t_redirs	*ft_newredir(char *filename)
+t_redirs	*ft_newredir(void)
 {
 	t_redirs	*new;
 
@@ -8,8 +8,10 @@ t_redirs	*ft_newredir(char *filename)
 	if (!new)
 		return (NULL);
 	new->fd = -1;
+	new->perm = O_RDWR;
+	new->io = 0;
 	new->delim = NULL;
-	new->filename = filename;
+	new->filename = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -37,7 +39,7 @@ void	ft_clearredir(t_redirs **head)
 
 	if (!head)
 		return ;
-	while (!(*head))
+	while ((*head))
 	{
 		tmp = (*head);
 		(*head) = (*head)->next;
@@ -50,18 +52,18 @@ void	ft_clearredir(t_redirs **head)
 	}
 }
 
-void	clear_n_keep_redir(t_redirs **head, t_redirs *keep)
+void	clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out)
 {
 	t_redirs	*tmp;
 
 	if (!head)
 		return ;
-	while (!(*head))
+	while ((*head))
 	{
 		tmp = (*head);
-		if (tmp == keep)
-			continue ;
 		(*head) = (*head)->next;
+		if (tmp == in || tmp == out)
+			continue ;
 		if (tmp->delim)
 			unlink(tmp->filename);
 		free(tmp->delim);
@@ -69,8 +71,12 @@ void	clear_n_keep_redir(t_redirs **head, t_redirs *keep)
 		close(tmp->fd);
 		free(tmp);
 	}
-	free(keep->delim);
-	free(keep);
+	if (out)
+		free(out->delim);
+	if (in)
+		free(in->delim);
+	free(out);
+	free(in);
 }
 
 t_redirs	*ft_lastredir(t_redirs	*head)

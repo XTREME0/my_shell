@@ -69,4 +69,3 @@ int	get_word(char *s, size_t *i, t_tokens **head)
 	ft_token_add(head, new);
 	return (1);
 }
-

@@ -1,32 +1,47 @@
 #include "parser.h"
 
-int	ft_mkhtmp(t_cmd *cmd)
+char	*ft_mkhtmp(void)
 {
 	char	*def;
 	char	*random;
 	char	*filename;
 
 	def = "/tmp/heredoc_tmp_";
-	random = ft_utoa((size_t)&random);
+	random = ft_utoa((size_t) & random);
 	if (!random)
-		return (0);
+		return (NULL);
 	filename = custom_join(def, random);
 	if (!filename)
-		return (0);
-	cmd->heredoc_file = filename;
+		return (free(random), NULL);
 	free(random);
-	return (1);
+	return (filename);
 }
 
-int	open_heredoc(char *delim, t_cmd **cmd)
+int	read_heredoc(t_redirs *redirs)
 {
-	(*cmd)->delim = ft_strdup(delim);
-	if ((*cmd)->delim == NULL)
+	char	*line;
+
+	redirs->fd = open(redirs->filename, O_CREAT | O_RDWR);
+	if (redirs->fd == -1)
+	{
+		printf(FD_ERR, redirs->filename, strerror(errno));
 		return (0);
-	if (!ft_mkhtmp((*cmd)))
-		return (0);
-	(*cmd)->fd_in = open((*cmd)->heredoc_file, O_RDWR | O_CREAT);
-	// if ((*cmd)->fd_in < 0)
-	// 	ft_printf("minishell: %s: %s\n", (*cmd)->heredoc_file, strerror(errno));
-	return (1);
+	}
+	line = readline("heredoc> ");
+	if (!line)
+	{
+		printf(HD_EOF, redirs->delim);
+		return (1);
+	}
+	while (ft_strcmp(line, redirs->delim) != 0)
+	{
+		write(redirs->fd, line, ft_strlen(line));
+		line = readline("heredoc> ");
+		if (!line)
+		{
+			printf(HD_EOF, redirs->delim);
+			break ;
+		}
+	}
+	return (close(redirs->fd), free(line), 1);
 }

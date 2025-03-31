@@ -13,9 +13,9 @@ static int	count_args(t_tokens *toks)
 		toks = toks->next;
 	}
 	return (i);
-}	
+}
 
-static int	copy_args(t_tokens *toks, char **arr)
+static int	copy_args(t_tokens *toks, char **arr, int *tf)
 {
 	t_tokens	*tmp;
 	int			pos;
@@ -24,7 +24,7 @@ static int	copy_args(t_tokens *toks, char **arr)
 	while (tmp && tmp->tok_type != CMD && tmp->tok_type != PIPE)
 		tmp = tmp->next;
 	if (!tmp || tmp->tok_type == PIPE)
-		return (free_table(arr), 1);
+		return (free(arr), *tf = 1, 1);
 	arr[0] = ft_strdup(tmp->tok_val);
 	if (!arr[0])
 		return (free_table(arr), 0);
@@ -46,13 +46,18 @@ static int	copy_args(t_tokens *toks, char **arr)
 static int	join_args(t_cmd *cmd, t_tokens *toks)
 {
 	char	**args;
+	int		tf;
 
 	args = malloc((count_args(toks) + 1) * sizeof(char *));
 	if (!args)
 		return (0);
-	if (!copy_args(toks, args))
+	tf = 0;
+	if (!copy_args(toks, args, &tf))
 		return (0);
-	cmd->kwargs = args;
+	if (tf)
+		cmd->kwargs = NULL;
+	else
+		cmd->kwargs = args;
 	return (1);
 }
 

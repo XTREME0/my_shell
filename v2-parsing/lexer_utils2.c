@@ -42,7 +42,6 @@ static void	q_content(char *s, size_t *i, size_t *j)
 	*j -= 1;
 }
 
-
 static int	concat_str(t_tokens *toks)
 {
 	char	*new;

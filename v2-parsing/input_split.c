@@ -1,4 +1,4 @@
-# include "parser.h"
+#include "parser.h"
 
 t_tokens	*input_split(char *str)
 {
@@ -12,10 +12,10 @@ t_tokens	*input_split(char *str)
 	while (str[i])
 	{
 		skip_spaces(str, &i);
-		if(!get_word(str, &i, &toks))
+		if (!get_word(str, &i, &toks))
 			return (ft_cleartoks(&toks), NULL);
 		skip_spaces(str, &i);
-		if(!get_redir(str, &i, &toks))
+		if (!get_redir(str, &i, &toks))
 			return (ft_cleartoks(&toks), NULL);
 	}
 	return (toks);
