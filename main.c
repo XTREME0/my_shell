@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/20 14:42:06 by ataai            ###   ########.fr       */
+/*   Updated: 2025/03/25 16:13:09 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,19 +136,22 @@ void	env_clear(t_env *e)
 	free(e);
 }
 
-int	main(int argc, char **argv, char **env)
+void	sighandler(int sig)
+{
+	signal(sig, SIG_IGN);
+	write(1, "\n$", 2);
+	signal(SIGINT, sighandler);
+}
+
+int	shell_prompt(t_cmd *cmd_node, t_env *my_env)
 {
 	char	*prompt;
-	t_env	*my_env;
-	t_cmd	*cmd_node;
-	int	i;
 
-	my_env = my_setenv(env);
+	if (cmd_node != NULL)
+		ft_clearcmds(&cmd_node);
 	cmd_node = NULL;
 	while (1)
 	{
-		while (wait(NULL) != -1)
-			;
 		prompt = readline("$");
 		if (prompt == NULL)
 			break ;
@@ -161,9 +164,26 @@ int	main(int argc, char **argv, char **env)
 		if (cmd_node == NULL)
 			return (-1);
 		exec_setup(&cmd_node, &my_env);
+		while (wait(NULL) != -1)
+			;
 		ft_clearcmds(&cmd_node);
+		cmd_node = NULL;
 		free(prompt);
 	}
 	env_clear(my_env);
+	return (0);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	t_env	*my_env;
+	t_cmd	*cmd_node;
+	int	i;
+
+	cmd_node = NULL;
+	my_env = my_setenv(env);
+	signal(SIGINT, sighandler);
+	signal(SIGQUIT, sighandler);
+	shell_prompt(cmd_node, my_env);
 	return (0);
 }
