@@ -1,5 +1,31 @@
 #include "parser.h"
 
+static int	open_any(t_redirs *redir, t_cmd *cmd, t_redirs **in, t_redirs **out)
+{
+	int	fd;
+
+	fd = open(redir->filename, redir->perm, 0644);
+	if (fd < 0)
+		printf(FD_ERR, redir->filename, strerror(errno));
+	if (redir->io)
+	{
+		cmd->fd_in = fd;
+		(*in) = redir;
+	}
+	else
+	{
+		cmd->fd_out = fd;
+		(*out) = redir;
+	}
+	if (redir->delim)
+		cmd->heredoc_file = redir->filename;
+	else
+		cmd->heredoc_file = NULL;
+	if (fd < 0 && redir->io)
+		return (0);
+	return (1);
+}
+
 int	create_redir(t_tokens *toks, t_redirs **redirs)
 {
 	t_redirs	*new_redir;
@@ -55,7 +81,7 @@ void	open_files(t_redirs *redirs, t_cmd *cmd)
 	head = redirs;
 	while (redirs)
 	{
-		if (!open_any(redirs, cmd, in, out))
+		if (!open_any(redirs, cmd, &in, &out))
 			break ;
 		redirs = redirs->next;
 	}

@@ -125,7 +125,6 @@ char		*ft_strjoin(char *s1, char *s2);
 void		redir_pipe(t_cmd *cmds);
 int			open_redirs(t_cmd *cmd, t_tokens *toks);
 int			create_redir(t_tokens *toks, t_redirs **redirs);
-int			open_any(t_redirs *redir, t_cmd *cmd, t_redirs *in, t_redirs *out);
 int			read_heredoc(t_redirs *redirs);
 int			create_heredocs(t_redirs *redirs);
 void		open_files(t_redirs *redirs, t_cmd *cmd);
