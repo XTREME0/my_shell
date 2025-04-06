@@ -53,7 +53,7 @@ void	open_files(t_redirs *redirs, t_cmd *cmd)
 	in = NULL;
 	out = NULL;
 	head = redirs;
-	while (redirs->next)
+	while (redirs)
 	{
 		if (!open_any(redirs, cmd, in, out))
 			break ;

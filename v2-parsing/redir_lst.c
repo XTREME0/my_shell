@@ -68,7 +68,8 @@ void	clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out)
 			unlink(tmp->filename);
 		free(tmp->delim);
 		free(tmp->filename);
-		close(tmp->fd);
+		if (tmp->fd >= 0)
+			close(tmp->fd);
 		free(tmp);
 	}
 	if (out)
@@ -79,13 +80,14 @@ void	clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out)
 	free(in);
 }
 
-t_redirs	*ft_lastredir(t_redirs	*head)
+t_redirs	*ft_lastredir(t_redirs	**head)
 {
-	if (!head)
+	t_redirs	*last;
+
+	if (!head || !(*head))
 		return (NULL);
-	while (head->next)
-	{
-		head = head->next;
-	}
-	return (head);
+	last = (*head);
+	while (last->next)
+		last = last->next;
+	return (last);
 }

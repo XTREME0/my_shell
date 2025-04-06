@@ -96,9 +96,9 @@ int			set_args(t_cmd *cmds, t_tokens *toks);
 
 // files
 
-void		open_in(char *filename, t_cmd **cmd);
-void		open_out(char *filename, t_cmd **cmd);
-void		open_append(char *filename, t_cmd **cmd);
+// void		open_in(char *filename, t_cmd **cmd);
+// void		open_out(char *filename, t_cmd **cmd);
+// void		open_append(char *filename, t_cmd **cmd);
 void		set_pipe(t_cmd **cmd);
 // int		open_heredoc(char *delim, t_cmd **cmd);
 
@@ -135,7 +135,7 @@ t_redirs	*ft_newredir(void);
 void		ft_addredir(t_redirs **head, t_redirs *new);
 void		ft_clearredir(t_redirs **head);
 void		clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out);
-t_redirs	*ft_lastredir(t_redirs	*head);
+t_redirs	*ft_lastredir(t_redirs **head);
 
 char		*ft_mkhtmp(void);
 

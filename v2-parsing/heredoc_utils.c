@@ -21,27 +21,24 @@ int	read_heredoc(t_redirs *redirs)
 {
 	char	*line;
 
-	redirs->fd = open(redirs->filename, O_CREAT | O_RDWR);
+	redirs->fd = open(redirs->filename, O_CREAT | O_RDWR, 0644);
 	if (redirs->fd == -1)
 	{
 		printf(FD_ERR, redirs->filename, strerror(errno));
 		return (0);
 	}
-	line = readline("heredoc> ");
-	if (!line)
+	while (1)
 	{
-		printf(HD_EOF, redirs->delim);
-		return (1);
-	}
-	while (ft_strcmp(line, redirs->delim) != 0)
-	{
-		write(redirs->fd, line, ft_strlen(line));
 		line = readline("heredoc> ");
 		if (!line)
 		{
 			printf(HD_EOF, redirs->delim);
 			break ;
 		}
+		if (ft_strcmp(line, redirs->delim) == 0)
+			break ;
+		write(redirs->fd, line, ft_strlen(line));
+		free(line);
 	}
 	return (close(redirs->fd), free(line), 1);
 }

@@ -12,7 +12,7 @@ void	redir_pipe(t_cmd *cmds)
 	}
 }
 
-static void	which_perm(t_tokens *toks, t_redirs *redir)
+static void	which_perm(t_tokens *toks, t_redirs **redir)
 {
 	t_redirs	*last;
 
@@ -22,11 +22,13 @@ static void	which_perm(t_tokens *toks, t_redirs *redir)
 	if (!last)
 		return ;	
 	if (toks->tok_type == HEREDOC || toks->tok_type == REDIR_IN)
-		redir->io = 1;
+		last->io = 1;
 	if (toks->tok_type == REDIR_OUT)
-		redir->perm = O_RDWR | O_CREAT;
+		last->perm = O_RDWR | O_CREAT;
 	if (toks->tok_type == APPEND)
-		redir->perm = O_RDWR | O_CREAT | O_APPEND;
+		last->perm = O_RDWR | O_CREAT | O_APPEND;
+	if (toks->tok_type == REDIR_IN || toks->tok_type == HEREDOC)
+		last->perm = O_RDWR;
 }
 
 static int	get_io(t_tokens **head, t_redirs **redirs)
@@ -40,7 +42,7 @@ static int	get_io(t_tokens **head, t_redirs **redirs)
 		{
 			if (!create_redir(toks, redirs))
 				return (0);
-			which_perm(toks->prev, (*redirs));
+			which_perm(toks->prev, redirs);
 		}
 		toks = toks->next;
 	}
@@ -60,12 +62,12 @@ int	open_redirs(t_cmd *cmd, t_tokens *toks)
 	redirs = NULL;
 	while (cmd)
 	{
-		if (!get_io(&toks, &redirs) || !create_heredocs(redirs))
+		if (!get_io(&toks, &redirs))
 			return (toks = head, 0);
-		open_files(redirs, cmd); // complete this. open files and quite if infile is invalid
+		if (!create_heredocs(redirs))
+			return (toks = head, 0);
+		open_files(redirs, cmd);
 		cmd = cmd->next;
 	}
-	// open io files
-	// ft_clearredir(&redirs);
 	return (toks = head, 1);
 }
