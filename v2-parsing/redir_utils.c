@@ -6,7 +6,10 @@ static int	open_any(t_redirs *redir, t_cmd *cmd, t_redirs **in, t_redirs **out)
 
 	fd = open(redir->filename, redir->perm, 0644);
 	if (fd < 0)
+	{
+		fd = -2;
 		printf(FD_ERR, redir->filename, strerror(errno));
+	}
 	if (redir->io)
 	{
 		cmd->fd_in = fd;
