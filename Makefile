@@ -1,14 +1,9 @@
 NAME	:= minishell
 
 CFLAGS	:= -lreadline #-fsanitize=address #-Wall -Werror -Wextra 
-SRCS	:= main.c free_join.c exec_cmds.c builtins/* parsing/* libft/libft.a ft_printf/libftprintf.a
+SRCS	:= main.c free_join.c exec_cmds.c builtins/* v2-parsing/* libft/libft.a
 
-all	: ft_printf $(NAME) 
-
-ft_printf:
-	make -C ft_printf/
+all	:  $(NAME) 
 
 $(NAME)	: $(SRCS)
 	cc $(CFLAGS) $(SRCS)
-
-.PHONY: ft_printf

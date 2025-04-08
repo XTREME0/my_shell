@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:34:18 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/13 14:07:13 by ariyad           ###   ########.fr       */
+/*   Updated: 2024/11/01 20:37:25 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "libft.h"
 
-static size_t	num_len(unsigned long n)
+static size_t	num_len(long int n)
 {
 	size_t	i;
 
@@ -29,7 +29,7 @@ static size_t	num_len(unsigned long n)
 	return (i);
 }
 
-static char	*fill_str(char *str, size_t l, unsigned long num)
+static char	*fill_str(char *str, size_t l, long int num)
 {
 	if (num < 0)
 	{
@@ -44,7 +44,7 @@ static char	*fill_str(char *str, size_t l, unsigned long num)
 	return (str);
 }
 
-char	*ft_utoa(unsigned int n)
+char	*ft_itoa(int n)
 {
 	char		*str;
 	size_t		l;
@@ -55,7 +55,7 @@ char	*ft_utoa(unsigned int n)
 		return (NULL);
 	str[l--] = '\0';
 	if (n != 0)
-		str = fill_str(str, l, n);
+		str = fill_str(str, l, (long int)n);
 	else
 	{
 		str[0] = '0';
