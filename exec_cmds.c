@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/25 13:38:30 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/07 20:59:10 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*add_path_tocmd(char *cmd, t_env *my_env)
 		return (cmd);
 	path = get_path(my_env);
 	if (path == NULL)
-		return (free(cmd), NULL);
+		return (cmd);
 	i = 0;
 	while (path[i])
 	{
@@ -77,18 +77,40 @@ char	*add_path_tocmd(char *cmd, t_env *my_env)
 		full_cmd = free_join(full_cmd, ft_strdup("/"));
 		full_cmd = free_join(full_cmd, ft_strdup(cmd));
 		if (access(full_cmd, X_OK) == 0)
-			return (free(cmd), free_table(path), full_cmd);
+			return (free_table(path), full_cmd);
 		free(full_cmd);
 		full_cmd = NULL;
 		i++;
 	}
-	return (free_table(path), free(cmd), NULL);
+	return (free_table(path), cmd);
+}
+
+char	**nodes_to_table(t_env *my_env)
+{
+	t_env	*tmp;
+	char	**env;
+	int	i;
+
+	if (my_env == NULL)
+		return (NULL);
+	tmp = *my_env;
+	i = 0;
+	while (tmp)V
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	env = malloc((i + 1) * sizeof(char *));
+	env[i] = NULL;
+	//to be continued ...
+
 }
 
 int	exec_cmd(t_cmd *cmd_node, t_env **my_env)
 {
 	int	f;
 	int	builtin;
+	int	err;
 
 	if (cmd_node == NULL)
 		return (-1);
@@ -102,14 +124,15 @@ int	exec_cmd(t_cmd *cmd_node, t_env **my_env)
 			return (-1);
 		if (access(cmd_node->kwargs[0], X_OK) != 0)
 			cmd_node->kwargs[0] = add_path_tocmd(cmd_node->kwargs[0], *my_env);
-		if (cmd_node->kwargs[0] == NULL)
-			write(2, "command not found\n", 18); //add the correct error message here and clear mem to exit
-		execve(cmd_node->kwargs[0], cmd_node->kwargs, NULL); //end set as NULL for now. to be changed after!
-		printf("execve makhdmatch hh\n\n"); // remove
+		//if (cmd_node->kwargs[0] == NULL)
+		//	write(2, "command not found\n", 18); //add the correct error message here and clear mem to exit
+		execve(cmd_node->kwargs[0], cmd_node->kwargs, NULL); //env set as NULL for now. to be changed after!
+		err = errno;
+		perror(strerror(err)); // no free?
 		//my_close(1, 0, -1, -1);
 		close(1);
 		close(0);
-		exit(0); // 0 for now, change later to handle error codes
+		exit(err);
 	}
 	return (0);
 }
@@ -119,6 +142,7 @@ int	exec_setup(t_cmd **cmd_node, t_env **my_env)
 	int	pfd[2];
 	t_cmd	*cmd;
 	t_cmd	*tmp;
+	int	status;
 
 	cmd = *cmd_node;
 	if (cmd == NULL)
@@ -135,6 +159,9 @@ int	exec_setup(t_cmd **cmd_node, t_env **my_env)
 		tmp = cmd;
 		cmd = cmd->next;
 	}
+	while(wait(NULL) != -1)
+		;
+	printf("-----------------exit status = %d\n", status);
 	//close(tmp->fd_in);
 	tmp->fd_in = -1;
 	return (0);
