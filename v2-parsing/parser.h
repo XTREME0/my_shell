@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 15:35:32 by ariyad            #+#    #+#             */
+/*   Updated: 2025/04/08 15:39:35 by ariyad           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -76,6 +88,9 @@ int			remove_quote(t_tokens *toks);
 void		assign_cmds(t_tokens *toks);
 void		assign_words(t_tokens *toks);
 
+// expansion
+int			rm_q_n_expand(t_tokens **toks);
+
 // input splitting
 t_tokens	*input_split(char *str);
 int			get_word(char *s, size_t *i, t_tokens **head);
@@ -96,11 +111,7 @@ int			set_args(t_cmd *cmds, t_tokens *toks);
 
 // files
 
-// void		open_in(char *filename, t_cmd **cmd);
-// void		open_out(char *filename, t_cmd **cmd);
-// void		open_append(char *filename, t_cmd **cmd);
 void		set_pipe(t_cmd **cmd);
-// int		open_heredoc(char *delim, t_cmd **cmd);
 
 // utils
 void		skip_spaces(char *s, size_t *i);

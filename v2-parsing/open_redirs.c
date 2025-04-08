@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_redirs.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 15:36:57 by ariyad            #+#    #+#             */
+/*   Updated: 2025/04/08 15:36:58 by ariyad           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 void	redir_pipe(t_cmd *cmds)
@@ -20,7 +32,7 @@ static void	which_perm(t_tokens *toks, t_redirs **redir)
 		return ;
 	last = ft_lastredir(redir);
 	if (!last)
-		return ;	
+		return ;
 	if (toks->tok_type == HEREDOC || toks->tok_type == REDIR_IN)
 		last->io = 1;
 	if (toks->tok_type == REDIR_OUT)

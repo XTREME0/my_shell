@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_lst.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 15:37:55 by ariyad            #+#    #+#             */
+/*   Updated: 2025/04/08 15:37:56 by ariyad           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 t_redirs	*ft_newredir(void)
@@ -78,6 +90,7 @@ void	clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out)
 		free(in->delim);
 	free(out);
 	free(in);
+	//leak when infile does not exist
 }
 
 t_redirs	*ft_lastredir(t_redirs	**head)
