@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/23 23:49:18 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/08 16:31:07 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
-# include "ft_printf/ft_printf.h"
 #include <sys/wait.h>
 #include <signal.h>
-/* # include "libft/libft.h"*/
+
+# define WHITE_SP "\r\t\v\f\n "
+# define HD_EOF "\nheredoc delimited by end-of-file (wanted \"%s\")\n"
+# define FD_ERR "\nminishell: %s: %s\n"
 
 typedef struct s_env
 {
@@ -41,8 +43,6 @@ typedef enum token_types
 	CMD = 1,
 	WORD,
 	FILES,
-	SINGLE_Q,
-	DOUBLE_Q,
 	REDIR_IN,
 	REDIR_OUT,
 	APPEND,
@@ -52,49 +52,33 @@ typedef enum token_types
 	EXPAND
 }	t_tok_types;
 
-typedef struct s_inp
-{
-	char			*str;
-	int				exp_split;
-	int				exported;
-	struct s_inp	*next;
-}	t_inp;
-
 typedef struct s_tokens
 {
-	int		tok_type;
-	char	*tok_val;
-	// int		*redir_in;
-	// int		*redir_out;
-	// int		heredoc;
-	// int		*append;
-	// int		expand;
+	int				tok_type;
+	char			*tok_val;
 	struct s_tokens	*next;
+	struct s_tokens	*prev;
 }	t_tokens;
+
+typedef struct s_redirs
+{
+	int				fd;
+	int				io;
+	int				perm;
+	char			*filename;
+	char			*delim;
+	struct s_redirs	*next;
+}	t_redirs;
 
 typedef struct s_cmd
 {
 	char			**kwargs;
 	int				fd_in;
 	int				fd_out;
-	int				heredoc_fd;
 	char			*heredoc_file;
-	char			*delim;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
-/*typedef	struct s_cmd
-{
-	char	*cmd;
-	char	**args;
-	int		fd_in;
-	int		fd_out;
-	int		is_append;
-	int		is_heredoc;
-	char	*heredoc_delim;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}	t_cmd;*/
 
 char	*get_val(t_env *env, char *key);
 int	print_env(t_env *env);
@@ -131,50 +115,76 @@ int     my_export(t_cmd *cmd_node, t_env *my_env);
 
 // Parsin 3la 9ed l7al
 
-# define WHITE_SP "\r\t\v\f\n "
 
+void		free_table(char **strs);
+char		*custom_join(char *s1, char *s2);
+t_cmd		*ft_newcmd(void);
+void		ft_addcmd(t_cmd **head, t_cmd *new);
+void		ft_delcmd(t_cmd *cmd);
+void		ft_clearcmds(t_cmd	**head);
+t_cmd		*ft_firstcmd(t_cmd *cmd);
+t_tokens	*ft_newtoken(char *tok_val);
+void		ft_token_add(t_tokens **head, t_tokens *new);
+void		ft_cleartoks(t_tokens **head);
+void		ft_token_replace(t_tokens **head, t_tokens *new_lst);
+void		ft_firsttok(t_tokens **head);
 
-t_cmd	*ft_newcmd(void);
-t_cmd	*ft_firstcmd(t_cmd *cmd);
-void	ft_addcmd(t_cmd **head, t_cmd *new);
-void	ft_delcmd(t_cmd *cmd);
-void	ft_clearcmds(t_cmd	**head);
-int	create_nodes(t_tokens *toks, t_cmd	**cmds);
-int	set_args(t_tokens *toks, t_cmd *cmds);
-int	set_redirs(t_tokens *toks, t_cmd **cmds);
-int	get_expans(char *str, size_t *i, t_inp **head, t_env *env);
+// tokenizing
+void		assign_redirs(t_tokens *toks);
+void		assign_files(t_tokens *toks);
+void		assign_expans(t_tokens *toks);
+int			remove_quote(t_tokens *toks);
+void		assign_cmds(t_tokens *toks);
+void		assign_words(t_tokens *toks);
 
-void	open_out(char *filename, t_cmd **cmd);
-void	open_in(char *filename, t_cmd **cmd);
-void	open_append(char *filename, t_cmd **cmd);
-int		open_heredoc(char *delim, t_cmd **cmd);
-void	set_pipe(t_cmd **cmd);
+// expansion
+int			rm_q_n_expand(t_tokens **toks);
 
+// input splitting
+t_tokens	*input_split(char *str);
+int			get_word(char *s, size_t *i, t_tokens **head);
+int			get_redir(char *s, size_t *i, t_tokens **head);
+void		skip_q_content(char *s, size_t *i);
+t_tokens	*tokenize(char *str);
 
-t_inp	*ft_newinp(char *str);
-void	ft_addinp(t_inp **head, t_inp *new);
-int		append_inp(t_inp **head, char *str, int exp_split);
-void	ft_clearinp(t_inp **head);
+// cmds list
+t_cmd		*ft_newcmd(void);
+void		ft_addcmd(t_cmd **head, t_cmd *new);
+void		ft_delcmd(t_cmd *cmd);
+void		ft_clearcmds(t_cmd	**head);
+t_cmd		*ft_firstcmd(t_cmd *cmd);
 
-t_tokens	*ft_newtoken(char *str);
-void	ft_token_add(t_tokens **head, t_tokens *new);
-void	ft_cleartoks(t_tokens **head);
+// cmds
+t_cmd		*create_nodes(t_tokens *toks);
+int			set_args(t_cmd *cmds, t_tokens *toks);
 
-t_tokens	*tokenize(char *str, t_env **env);
+// files
 
-int	join_inps(t_tokens **toks_head, t_inp **inp_head);
+void		set_pipe(t_cmd **cmd);
 
-int	filter_line(const char *str, t_env **env, t_tokens **toks);
+// utils
+void		skip_spaces(char *s, size_t *i);
+int			ft_isspace(char c);
+int			is_redir(char c);
+int			is_quote(char c);
+int			has_quotes(char *str);
+int			is_expan(char *val);
 
-int	get_q_content(char *str, size_t *i, t_inp **head, t_env *env);
+// redirs
+void		redir_pipe(t_cmd *cmds);
+int			open_redirs(t_cmd *cmd, t_tokens *toks);
+int			create_redir(t_tokens *toks, t_redirs **redirs);
+int			read_heredoc(t_redirs *redirs);
+int			create_heredocs(t_redirs *redirs);
+void		open_files(t_redirs *redirs, t_cmd *cmd);
 
-void	skip_white_sp(const char *str, size_t *i);
-int		is_quote(char c);
-int		ft_isspace(char c);
-int		is_redir(char *str);
+// redirs list
+t_redirs	*ft_newredir(void);
+void		ft_addredir(t_redirs **head, t_redirs *new);
+void		ft_clearredir(t_redirs **head);
+void		clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out);
+t_redirs	*ft_lastredir(t_redirs **head);
 
-void	free_table(char **strs);
-
-t_cmd	*construct_cmds(char *str, t_env **env);
+char		*ft_mkhtmp(void);
 
 #endif
