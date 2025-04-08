@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/07 20:59:10 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/08 19:22:16 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,26 @@ char	*add_path_tocmd(char *cmd, t_env *my_env)
 	return (free_table(path), cmd);
 }
 
-char	**nodes_to_table(t_env *my_env)
-{
-	t_env	*tmp;
-	char	**env;
-	int	i;
-
-	if (my_env == NULL)
-		return (NULL);
-	tmp = *my_env;
-	i = 0;
-	while (tmp)V
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	env = malloc((i + 1) * sizeof(char *));
-	env[i] = NULL;
-	//to be continued ...
-
-}
+//char	**nodes_to_table(t_env *my_env)
+//{
+//	t_env	*tmp;
+//	char	**env;
+//	int	i;
+//
+//	if (my_env == NULL)
+//		return (NULL);
+//	tmp = *my_env;
+//	i = 0;
+//	while (tmp)
+//	{
+//		i++;
+//		tmp = tmp->next;
+//	}
+//	env = malloc((i + 1) * sizeof(char *));
+//	env[i] = NULL;
+//	//to be continued ...
+//
+//}
 
 int	exec_cmd(t_cmd *cmd_node, t_env **my_env)
 {

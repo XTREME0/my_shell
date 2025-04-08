@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:34:29 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 15:38:29 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/08 19:21:26 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	put_export(t_env *env)
 	{
 		if (ft_strcmp(env->key, "_") == 0)
 			return (0);
-		ft_printf("declare -x %s", env->key);
+		printf("declare -x %s", env->key);
 	}
 	if (env->val)
-		ft_printf("=\"%s\"", env->val);
-	ft_printf("\n");
+		printf("=\"%s\"", env->val);
+	printf("\n");
 	return (0);
 }

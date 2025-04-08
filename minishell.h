@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/08 16:31:07 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/08 19:29:14 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include "v2-parsing/parser.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <readline/readline.h>
@@ -157,6 +158,7 @@ t_cmd		*ft_firstcmd(t_cmd *cmd);
 // cmds
 t_cmd		*create_nodes(t_tokens *toks);
 int			set_args(t_cmd *cmds, t_tokens *toks);
+t_cmd	*construct_cmds(char *str);
 
 // files
 

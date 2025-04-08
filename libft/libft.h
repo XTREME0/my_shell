@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:52:41 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/08 16:05:23 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/08 19:20:39 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+int	ft_strcmp(char *s1, char *s2);
 char	*ft_utoa(unsigned int n);
 
 typedef struct s_list
