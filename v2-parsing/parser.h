@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:35:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:39:35 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/08 16:19:33 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <sys/wait.h>
+# include "../libft/libft.h"
 
 # define WHITE_SP "\r\t\v\f\n "
 # define HD_EOF "\nheredoc delimited by end-of-file (wanted \"%s\")\n"
@@ -120,17 +121,6 @@ int			is_redir(char c);
 int			is_quote(char c);
 int			has_quotes(char *str);
 int			is_expan(char *val);
-
-//remove these
-char		**ft_split(char const *s, char c);
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char		*ft_strdup(const char *s1);
-int			ft_strcmp(char *str1, char *str2);
-size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t		ft_strlen(const char *s);
-char		*ft_utoa(unsigned int n);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-char		*ft_strjoin(char *s1, char *s2);
 
 // redirs
 void		redir_pipe(t_cmd *cmds);

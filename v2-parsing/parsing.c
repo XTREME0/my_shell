@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:40:40 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:41:02 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/08 16:18:49 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_cmd	*construct_cmds(char *str)
 	return (ft_cleartoks(&toks), cmds);
 }
 
-int	main(int ac, char **av, char **env)
-{
-	char *str = readline("$ ");
-	t_cmd	*cmds = construct_cmds(str);
-	t_cmd	*head = cmds;
-	ft_clearcmds(&head);
-	free(str);
-}
+//int	main(int ac, char **av, char **env)
+//{
+//	char *str = readline("$ ");
+//	t_cmd	*cmds = construct_cmds(str);
+//	t_cmd	*head = cmds;
+//	ft_clearcmds(&head);
+//	free(str);
+//}
