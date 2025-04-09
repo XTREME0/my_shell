@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/08 19:29:14 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/09 16:54:45 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ t_cmd		*ft_firstcmd(t_cmd *cmd);
 t_cmd		*create_nodes(t_tokens *toks);
 int			set_args(t_cmd *cmds, t_tokens *toks);
 t_cmd	*construct_cmds(char *str);
+void	del_other_cmds(t_cmd *cmd_node);
 
 // files
 

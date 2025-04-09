@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/08 19:22:16 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/09 17:32:26 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,17 @@ int	exec_cmd(t_cmd *cmd_node, t_env **my_env)
 			return (-1);
 		if (access(cmd_node->kwargs[0], X_OK) != 0)
 			cmd_node->kwargs[0] = add_path_tocmd(cmd_node->kwargs[0], *my_env);
+		del_other_cmds(cmd_node);
 		//if (cmd_node->kwargs[0] == NULL)
 		//	write(2, "command not found\n", 18); //add the correct error message here and clear mem to exit
 		execve(cmd_node->kwargs[0], cmd_node->kwargs, NULL); //env set as NULL for now. to be changed after!
 		err = errno;
 		perror(strerror(err)); // no free?
 		//my_close(1, 0, -1, -1);
-		close(1);
 		close(0);
+		close(1);
+		close(cmd_node->fd_in);
+		close(cmd_node->fd_out);
 		exit(err);
 	}
 	return (0);
@@ -149,20 +152,28 @@ int	exec_setup(t_cmd **cmd_node, t_env **my_env)
 		return (-1);
 	while (cmd)
 	{
-		if (cmd->next && cmd->fd_out == -1)
+		if (cmd->fd_out == -1)
 		{
 			pipe(pfd);
 			cmd->fd_out = pfd[1];
-			cmd->next->fd_in = pfd[0];
+			if (cmd->next && cmd->next->fd_in == -1)
+				cmd->next->fd_in = pfd[0];
+			else
+				close(pfd[0]);
 		}
 		exec_cmd(cmd, my_env);
 		tmp = cmd;
 		cmd = cmd->next;
+		if (tmp && tmp->fd_in > 2)
+			close(tmp->fd_in);
+		if (tmp && tmp->fd_out > 2)
+			close(tmp->fd_out);
+		//if (tmp && tmp->next)
+		//	ft_delcmd(tmp);
 	}
-	while(wait(NULL) != -1)
+	while(wait(&status) != -1)
 		;
 	printf("-----------------exit status = %d\n", status);
-	//close(tmp->fd_in);
-	tmp->fd_in = -1;
+	//tmp->fd_in = -1;
 	return (0);
 }

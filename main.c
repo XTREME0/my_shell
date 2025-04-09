@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/08 19:29:49 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/09 17:30:44 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	env_clear(t_env *e)
 void	sighandler(int sig)
 {
 	signal(sig, SIG_IGN);
-	write(1, "\n$", 2);
+	write(1, "\nminishell$ ", 2);
 	signal(SIGINT, sighandler);
 }
 
@@ -152,7 +152,7 @@ int	shell_prompt(t_cmd *cmd_node, t_env *my_env)
 	cmd_node = NULL;
 	while (1)
 	{
-		prompt = readline("$");
+		prompt = readline("minishell$ ");
 		if (prompt == NULL)
 			break ;
 		if (prompt[0] == 0)
