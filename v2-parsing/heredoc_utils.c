@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:44 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:38:45 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:24:34 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	read_heredoc(t_redirs *redirs)
 		if (ft_strcmp(line, redirs->delim) == 0)
 			break ;
 		write(redirs->fd, line, ft_strlen(line));
+		write(redirs->fd, "\n", 1);
 		free(line);
 	}
 	return (close(redirs->fd), free(line), 1);

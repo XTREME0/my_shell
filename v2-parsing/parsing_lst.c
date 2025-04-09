@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:02 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:38:03 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:31:13 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	ft_delcmd(t_cmd *cmd)
 	size_t	i;
 
 	i = 0;
-	if (cmd->fd_in > 1)
+	if (cmd->fd_in > 2)
 		close(cmd->fd_in);
-	if (cmd->fd_out > 1)
+	if (cmd->fd_out > 2)
 		close(cmd->fd_out);
 	free_table(cmd->kwargs);
 	if (cmd->heredoc_file)
