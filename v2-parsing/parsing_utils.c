@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:58 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:37:59 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/10 15:29:08 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,15 @@ void	del_other_cmds(t_cmd *cmd)
 		ft_delcmd(tmp);
 		prev = prev->prev;
 	}
+}
+
+void	advance(t_cmd **head)
+{
+	t_cmd	*tmp;
+
+	if (!head || !(*head))
+		return ;
+	tmp = (*head);
+	(*head) = (*head)->next;
+	ft_delcmd(tmp);
 }

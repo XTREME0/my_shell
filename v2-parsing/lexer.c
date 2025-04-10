@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:06 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:38:07 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/10 17:00:53 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_tokens	*tokenize(char *str)
 	assign_files(toks);
 	assign_cmds(toks);
 	assign_words(toks);
-	assign_expans(toks);
-	if (!rm_q_n_expand(toks))
-		return (ft_cleartoks(&head), NULL);
-	assign_cmds(toks);
-	assign_words(toks);
+	// assign_expans(toks);
+	// if (!rm_q_n_expand(toks))
+	// 	return (ft_cleartoks(&head), NULL);
+	// assign_cmds(toks);
+	// assign_words(toks);
 	return (toks);
 }
 

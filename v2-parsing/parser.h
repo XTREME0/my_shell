@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:35:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/10 15:12:31 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/10 18:22:19 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,15 @@ void		ft_firsttok(t_tokens **head);
 void		assign_redirs(t_tokens *toks);
 void		assign_files(t_tokens *toks);
 void		assign_expans(t_tokens *toks);
-int			remove_quote(t_tokens *toks);
+int			remove_quote(char **token);
 void		assign_cmds(t_tokens *toks);
 void		assign_words(t_tokens *toks);
 
 // expansion
-int			rm_q_n_expand(t_tokens **toks);
+int			treat_strs(t_tokens **toks);
+char		*env_val(t_env *env, char *exp);
+int			remove_quote(char **token);
+char		*reg_expand(char *str, t_env *env, int tf);
 
 // input splitting
 t_tokens	*input_split(char *str);
@@ -132,6 +135,7 @@ size_t		ft_strlen(const char *s);
 char		*ft_utoa(unsigned int n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char *s1, char *s2);
+char		*ft_strjoin_plus(char *s1, char *s2);
 
 // redirs
 void		redir_pipe(t_cmd *cmds);
@@ -149,5 +153,24 @@ void		clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out);
 t_redirs	*ft_lastredir(t_redirs **head);
 
 char		*ft_mkhtmp(void);
+
+// remove these later
+
+typedef struct s_env
+{
+	int		flag;	
+	char		*key;
+	char		*val;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+
+int	find_chr(char *str, char c);
+t_env	*envlast(t_env *lst);
+void	env_add_back(t_env **lst, t_env *new);
+char	**split_by_two(char *env, char c);
+t_env	*new_env(char *env);
+t_env	*my_setenv(char **env);
+void	env_clear(t_env *e);
 
 #endif
