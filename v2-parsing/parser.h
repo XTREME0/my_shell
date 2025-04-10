@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:35:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:39:35 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/10 15:12:31 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int			set_args(t_cmd *cmds, t_tokens *toks);
 // files
 
 void		set_pipe(t_cmd **cmd);
+int			open_check(t_redirs *redir, int perm);
 
 // utils
 void		skip_spaces(char *s, size_t *i);

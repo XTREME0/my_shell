@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:51 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:37:52 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/10 15:18:55 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ static int	open_any(t_redirs *redir, t_cmd *cmd, t_redirs **in, t_redirs **out)
 {
 	int	fd;
 
-	fd = open(redir->filename, redir->perm, 0644);
-	if (fd < 0)
-	{
+	if (!open_check(redir, redir->perm))
 		fd = -2;
-		printf(FD_ERR, redir->filename, strerror(errno));
-	}
 	if (redir->io)
 	{
 		cmd->fd_in = fd;
