@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:51 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/10 15:18:55 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/11 21:51:22 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,4 @@ void	open_files(t_redirs *redirs, t_cmd *cmd)
 }
 
 // find a way to keep the node with fd_out and node with fd_in
-// their FDs must be kept open and kept 
+// their FDs must be kept open

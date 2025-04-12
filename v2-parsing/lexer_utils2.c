@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:10 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/10 18:26:22 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/12 12:58:00 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,15 @@ int	replace_expan(char **new, char *str, size_t	*i, t_env *env)
 {
 	char		*s;
 	char		*tmp;
-	static int	j;
+	static int	j; // will not work on more than one string
 
 	s = *new;
 	*i += 1;
 	if (str[*i] == 0)
-		return (custom_join(*new, "$"), 1);
+	{
+		tmp = *new;
+		return (*new = custom_join(tmp, "$"), free(tmp), 1);
+	}
 	while (str[*i] && !is_quote(str[*i]) && !ft_isspace(str[*i])
 		&& !is_redir(str[*i]))
 	{
@@ -112,7 +115,7 @@ int	replace_expan(char **new, char *str, size_t	*i, t_env *env)
 	}
 	*new = ft_substr(str, *i - j, j);
 	if (!(*new))
-		return (free(s), NULL);
+		return (free(s), 0);
 	tmp = *new;
 	*new = ft_strjoin_plus(s, env_val(env, *new));
 	return (1);
@@ -122,14 +125,18 @@ char	*reg_expand(char *str, t_env *env, int tf)
 {
 	char	*new;
 	size_t	i;
+	int		in_quote;
 
 	if (!tf || !is_expan(str))
 		return (ft_strdup(str));
 	i = 0;
 	new = NULL;
+	in_quote = 1;
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '\"')
+			in_quote *= -1;
+		if (str[i] == '$' && str[i] < 0)
 		{
 			if (!replace_expan(&new, str, &i, env))
 				return (NULL);
@@ -137,6 +144,7 @@ char	*reg_expand(char *str, t_env *env, int tf)
 		// new = custom_join(tmp, );
 		i++;
 	}
+	return (new);
 }
 
 int	count_q_words(char	*str)

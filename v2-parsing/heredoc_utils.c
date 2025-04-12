@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:44 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/10 15:16:13 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/12 12:47:31 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	hereline(t_redirs *redirs)
 		if (ft_strcmp(line, redirs->delim) == 0)
 			break ;
 		// expand
-		write(redirs->fd, line, ft_strlen(line));
-		write(redirs->fd, "\n", 1);
+		fd_printf(redirs->fd, "%s\n", line);
 		free(line);
 	}
 	free(line);
@@ -56,6 +55,6 @@ int	read_heredoc(t_redirs *redirs)
 {
 	if (!open_check(redirs, O_CREAT | O_RDWR))
 		return (0);
-	
+	hereline(redirs);
 	return (close(redirs->fd), 1);
 }
