@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:44 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/12 12:47:31 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/12 20:44:38 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_mkhtmp(void)
 	return (filename);
 }
 
-int	hereline(t_redirs *redirs)
+static int	hereline(t_redirs *redirs, t_env *env)
 {
 	char	*line;
 	
@@ -43,7 +43,7 @@ int	hereline(t_redirs *redirs)
 		}
 		if (ft_strcmp(line, redirs->delim) == 0)
 			break ;
-		// expand
+		reg_expand(&line, env, has_quotes(redirs->delim));
 		fd_printf(redirs->fd, "%s\n", line);
 		free(line);
 	}
@@ -51,10 +51,12 @@ int	hereline(t_redirs *redirs)
 	return (1);
 }
 
-int	read_heredoc(t_redirs *redirs)
+int	read_heredoc(t_redirs *redirs, t_env *env)
 {
+	if (!remove_quote(&redirs->delim))
+		return (0);
 	if (!open_check(redirs, O_CREAT | O_RDWR))
 		return (0);
-	hereline(redirs);
+	hereline(redirs, env);
 	return (close(redirs->fd), 1);
 }

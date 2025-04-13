@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:35:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/12 15:24:54 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/12 20:37:24 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_stb	*stb_new(char *str);
 void	stb_addfront(t_stb **head, t_stb *new);
 void	stb_addback(t_stb **head, t_stb *new);
 void	stb_clear(t_stb **head);
+char	*stb_merge(t_stb *build);
+void	replace(char **s, size_t start, size_t end, char *replace);
 
 typedef enum token_types
 {
@@ -125,7 +127,8 @@ void		assign_words(t_tokens *toks);
 int			treat_strs(t_tokens **toks);
 char		*env_val(t_env *env, char *exp);
 int			remove_quote(char **token);
-char		*reg_expand(char *str, t_env *env, int tf);
+void		reg_expand(char **s, t_env *env, int tf);
+void	skip_expand(char *str, size_t *i);
 
 // input splitting
 t_tokens	*input_split(char *str);
@@ -178,7 +181,7 @@ void	fd_printf(int fd, const char *format, ...);
 void		redir_pipe(t_cmd *cmds);
 int			open_redirs(t_cmd *cmd, t_tokens *toks);
 int			create_redir(t_tokens *toks, t_redirs **redirs);
-int			read_heredoc(t_redirs *redirs);
+int			read_heredoc(t_redirs *redirs, t_env *env);
 int			create_heredocs(t_redirs *redirs);
 void		open_files(t_redirs *redirs, t_cmd *cmd);
 
