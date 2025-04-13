@@ -12,8 +12,6 @@ char	*stb_merge(t_stb *build)
 	{
 		tmp = new;
 		new = custom_join(tmp, build->str);
-		if (!new)
-			return (free(tmp), new);
 		free(tmp);
 		build = build->next;
 	}

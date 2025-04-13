@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:51 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/11 21:51:22 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/13 16:54:32 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ int	create_redir(t_tokens *toks, t_redirs **redirs)
 	return (1);
 }
 
-int	create_heredocs(t_redirs *redirs)
+int	create_heredocs(t_redirs *redirs, t_env *env)
 {
 	while (redirs)
 	{
 		if (redirs->delim)
 		{
-			if (!read_heredoc(redirs))
+			if (!read_heredoc(redirs, env))
 				return (0);
 		}
 		redirs = redirs->next;

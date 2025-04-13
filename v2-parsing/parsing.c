@@ -6,13 +6,13 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:40:40 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/10 15:30:25 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/13 16:56:10 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_cmd	*construct_cmds(char *str)
+t_cmd	*construct_cmds(char *str, t_env *env)
 {
 	t_tokens	*toks;
 	t_cmd		*cmds;
@@ -26,7 +26,7 @@ t_cmd	*construct_cmds(char *str)
 	if (!set_args(cmds, toks))
 		return (ft_cleartoks(&toks), NULL);
 	redir_pipe(cmds);
-	if (!open_redirs(cmds, toks))
+	if (!open_redirs(cmds, toks, env))
 		return (ft_cleartoks(&toks), NULL);
 	return (ft_cleartoks(&toks), cmds);
 }

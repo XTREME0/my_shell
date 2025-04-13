@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:35:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/12 20:37:24 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/13 16:56:52 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int			treat_strs(t_tokens **toks);
 char		*env_val(t_env *env, char *exp);
 int			remove_quote(char **token);
 void		reg_expand(char **s, t_env *env, int tf);
-void	skip_expand(char *str, size_t *i);
+void		skip_expand(char *str, size_t *i);
 
 // input splitting
 t_tokens	*input_split(char *str);
@@ -143,6 +143,7 @@ void		ft_addcmd(t_cmd **head, t_cmd *new);
 void		ft_delcmd(t_cmd *cmd);
 void		ft_clearcmds(t_cmd	**head);
 t_cmd		*ft_firstcmd(t_cmd *cmd);
+t_cmd	*construct_cmds(char *str, t_env *env);
 
 // cmds
 t_cmd		*create_nodes(t_tokens *toks);
@@ -179,10 +180,10 @@ void	fd_printf(int fd, const char *format, ...);
 
 // redirs
 void		redir_pipe(t_cmd *cmds);
-int			open_redirs(t_cmd *cmd, t_tokens *toks);
+int			open_redirs(t_cmd *cmd, t_tokens *toks, t_env *env);
 int			create_redir(t_tokens *toks, t_redirs **redirs);
 int			read_heredoc(t_redirs *redirs, t_env *env);
-int			create_heredocs(t_redirs *redirs);
+int			create_heredocs(t_redirs *redirs, t_env *env);
 void		open_files(t_redirs *redirs, t_cmd *cmd);
 
 // redirs list

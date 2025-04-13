@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:10 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/12 20:35:42 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/13 17:52:54 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	reg_expand(char **s, t_env *env, int tf)
 	char	*val;
 
 	str = *s;
-	if (!tf || !is_expan(str))
+	if (tf || !is_expan(str))
 		return ;
 	i = 0;
 	while (str[i])
@@ -157,10 +157,9 @@ int	count_q_words(char	*str)
 	len = 0;
 	while (str[i])
 	{
-		if (is_quote(str[i]))
-			len--;
+		if (!is_quote(str[i]))
+			len++;
 		i++;
-		len++;
 	}
 	return (len);
 }
@@ -183,10 +182,10 @@ int	remove_quote(char **token)
 			new[i] = *tok;
 			i++;
 		}
-		*tok++;
+		tok++;
 	}
 	new[i] = 0;
-	free(tok);
-	token = new;
+	free(*token);
+	*token = new;
 	return (1);
 }

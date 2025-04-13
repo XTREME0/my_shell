@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:04 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/10 15:45:14 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/13 17:28:26 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ char	*env_val(t_env *env, char *exp)
 {
 	while (env)
 	{
-		if (ft_strcmp(env->key, exp))
+		if (ft_strcmp(env->key, exp + 1))
+		{
 			env = env->next;
+			continue ;
+		}
 		if (!env->val)
 			return (NULL);
 		return (ft_strdup(env->val));

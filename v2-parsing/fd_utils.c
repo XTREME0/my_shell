@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:36:37 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/12 12:48:30 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/13 17:42:21 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,10 @@ void	set_pipe(t_cmd **cmd)
 
 int	open_check(t_redirs *redir, int perm)
 {
-	char	*msg;
-
 	redir->fd = open(redir->filename, perm, 0644);
 	if (redir->fd == -1)
 	{
-		msg = strerror(errno);
-		fd_printf(2, FD_ERR, redir->filename, msg);
-		free(msg);
+		fd_printf(2, FD_ERR, redir->filename, strerror(errno));
 		return (0);
 	}
 	return (1);
