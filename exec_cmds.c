@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/14 14:35:44 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 17:32:32 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ int	exec_setup(t_cmd **cmd_node, t_env **my_env)
 	waitpid(cpid, &status, 0);
 	while(wait(NULL) != -1)
 		;
-	set_exit_status(my_env, status);
+	//set_exit_status(my_env, WEXITSTATUS(status));
+	//set_exit_status(my_env, status);
 	return (0);
 }
