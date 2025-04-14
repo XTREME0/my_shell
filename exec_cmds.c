@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:29:40 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/14 17:32:32 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 17:44:25 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	exec_cmd(t_cmd *cmd_node, t_env **my_env)
 
 	if (cmd_node == NULL || cmd_node->kwargs[0] == NULL)
 		return (-1);
-	builtin = 1;
+	builtin = -1;
 	if (cmd_node->prev == NULL && cmd_node->next == NULL)
 		builtin = exec_builtin(cmd_node, my_env);
 	if (builtin != -1)
