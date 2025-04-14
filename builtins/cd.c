@@ -6,13 +6,13 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:43:12 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/11 13:26:38 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 14:21:29 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	set_by_key(t_env **env, char *key, const char *val)
+int	set_by_key(t_env **env, char *key, char *val)
 {
 	char	**pair;
 
@@ -51,7 +51,7 @@ int	cd(t_env **env, char *str)
 	char	wd[PATH_MAX];
 
 	if (str == NULL || chdir(str) == -1)
-		return (-1);
+		return (1);
 	getcwd(wd, PATH_MAX);
 	set_by_key(env, "OLDPWD", get_val(*env, "PWD"));
 	set_by_key(env, "PWD", wd);

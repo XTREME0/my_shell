@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:42:46 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/08 19:49:16 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 14:06:10 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	print_env(t_env *env)
 	t_env	*tmp;
 
 	if (env == NULL)
-		return (-1);
+		return (1);
 	tmp = env;
 	while (tmp)
 	{

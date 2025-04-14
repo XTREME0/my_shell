@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/09 17:30:44 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/11 10:19:47 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	env_clear(t_env *e)
 void	sighandler(int sig)
 {
 	signal(sig, SIG_IGN);
-	write(1, "\nminishell$ ", 2);
+	write(1, "\nminishell$ ", 12);
 	signal(SIGINT, sighandler);
 }
 
@@ -160,6 +160,7 @@ int	shell_prompt(t_cmd *cmd_node, t_env *my_env)
 			free(prompt);
 			continue ;
 		}
+		add_history(prompt);
 		cmd_node = construct_cmds(prompt);
 		if (cmd_node == NULL)
 			return (-1);
@@ -184,6 +185,7 @@ int	main(int argc, char **argv, char **env)
 	my_env = my_setenv(env);
 	signal(SIGINT, sighandler);
 	signal(SIGQUIT, sighandler);
+	read_history("history");
 	shell_prompt(cmd_node, my_env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:03:25 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 15:36:46 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 14:11:37 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	my_export_write(t_env *env, char *arg)
 
 	args = ft_split(arg, ' ');
 	if (args == NULL)
-		return (-1);
+		return (1);
 	i = 0;
 	while (args[i])
 	{
@@ -104,14 +104,16 @@ int	my_export_write(t_env *env, char *arg)
 int	my_export(t_cmd *cmd_node, t_env *my_env)
 {
 	int	i;
+	int	ret;
 
 	i = 1;
+	ret = 0;
 	if (cmd_node->kwargs[1] == NULL)
 		print_export(my_env);
 	while (cmd_node->kwargs[i])
 	{
-		my_export_write(my_env, cmd_node->kwargs[i]); //check failure
+		ret = my_export_write(my_env, cmd_node->kwargs[i]); //check failure
 		i++;
 	}
-	return (0);
+	return (ret);
 }

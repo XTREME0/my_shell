@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:05:44 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/20 00:34:03 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 14:06:00 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	echo(t_cmd *cmd)
 	int	i;
 
 	if (cmd == NULL)
-		return (-1);
+		return (1);
 	option = 0;
 	if (cmd->kwargs && cmd->kwargs[0])
 	{

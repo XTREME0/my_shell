@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/09 16:54:45 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 14:34:07 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	unset(t_cmd * cmd, t_env **env);
 int	put_export(t_env *env);
 int	export_add_replace(t_env **env, char **pair);
 void	my_exit(t_cmd *cmd, t_env **env);
-int	set_by_key(t_env **env, char *key, const char *val);
+int	set_by_key(t_env **env, char *key, char *val);
 char	*ft_itoa(int n);
 void	free_tab(char **tab);
 void	env_error(char **pair);
@@ -110,6 +110,9 @@ int	exec_cmd(t_cmd *cmd_node, t_env **my_env);
 int	echo(t_cmd *cmd);
 void	env_clear(t_env *e);
 int     my_export(t_cmd *cmd_node, t_env *my_env);
+void	go_back_clear_cmd(t_cmd *cmd);
+void	print_cmd_err(char *cmd);
+void	set_exit_status(t_env **my_env, int status);
 // t_cmd	*add_cmd(char **cmd_args);
 // void	cmd_add_back(t_cmd **lst, t_cmd *new);
 // t_cmd	*cmdlast(t_cmd *lst);

@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:36:57 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:36:58 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/11 22:23:44 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	get_io(t_tokens **head, t_redirs **redirs)
 	}
 	if (toks)
 		toks = toks->next;
+	(*head) = toks;
 	return (1);
 }
 
@@ -71,9 +72,9 @@ int	open_redirs(t_cmd *cmd, t_tokens *toks)
 	if (!cmd || !toks)
 		return (0);
 	head = toks;
-	redirs = NULL;
 	while (cmd)
 	{
+		redirs = NULL;
 		if (!get_io(&toks, &redirs))
 			return (toks = head, 0);
 		if (!create_heredocs(redirs))

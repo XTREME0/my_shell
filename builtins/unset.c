@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:46:41 by ataai             #+#    #+#             */
-/*   Updated: 2025/03/19 21:17:57 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/14 14:12:06 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	unset(t_cmd *cmd, t_env **env)
 	t_env	*tmp;
 
 	if (env == NULL || *env == NULL || cmd == NULL)
-		return (-1);
+		return (1);
 	if (cmd->kwargs[1] == NULL)
-		return (-1);
+		return (1);
 	tmp = *env;
 	while (tmp)
 	{
