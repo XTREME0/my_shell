@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:36:37 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 17:42:21 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:39:58 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 void	set_pipe(t_cmd **cmd)
 {

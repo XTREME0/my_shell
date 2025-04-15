@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:40:40 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/15 14:31:22 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/15 14:45:28 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 t_cmd	*construct_cmds(char *str, t_env *env)
 {

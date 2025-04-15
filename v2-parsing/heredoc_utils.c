@@ -6,15 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:44 by ariyad            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/09 17:26:01 by ataai            ###   ########.fr       */
-=======
-/*   Updated: 2025/04/13 17:55:21 by ariyad           ###   ########.fr       */
->>>>>>> v2-parsing
+/*   Updated: 2025/04/15 14:41:11 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 char	*ft_mkhtmp(void)
 {

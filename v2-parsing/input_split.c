@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:27 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:38:28 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:41:30 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 t_tokens	*input_split(char *str)
 {

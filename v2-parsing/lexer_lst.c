@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:19 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 16:27:28 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:42:42 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 t_tokens	*ft_newtoken(char *tok_val)
 {

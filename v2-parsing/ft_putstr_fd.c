@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "../minishell.h"
 
 void	ft_pustr_fd(int fd, const char *s)
 {

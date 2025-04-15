@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:04 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 17:28:26 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:51:07 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 int	has_quotes(char *str)
 {

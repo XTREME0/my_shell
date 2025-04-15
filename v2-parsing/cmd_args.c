@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:36:30 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:36:31 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:39:00 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 static int	count_args(t_tokens *toks)
 {

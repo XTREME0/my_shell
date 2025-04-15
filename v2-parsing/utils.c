@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:07 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:37:08 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:36:17 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 void	free_table(char **strs)
 {

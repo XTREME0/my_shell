@@ -6,13 +6,13 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:25:54 by ataai             #+#    #+#             */
-/*   Updated: 2024/10/31 10:25:57 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/15 15:17:52 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(int fd, char *s)
 {
 	if (s == NULL)
 		return ;

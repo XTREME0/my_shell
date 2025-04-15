@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "../minishell.h"
 
 // int	treat_strs(t_tokens **toks)
 // {

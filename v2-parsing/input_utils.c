@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:22 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/12 20:13:33 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:41:58 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 void	skip_spaces(char *s, size_t *i)
 {

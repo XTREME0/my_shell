@@ -6,15 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:06 by ariyad            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/08 16:17:07 by ataai            ###   ########.fr       */
-=======
-/*   Updated: 2025/04/10 17:00:53 by ariyad           ###   ########.fr       */
->>>>>>> v2-parsing
+/*   Updated: 2025/04/15 14:42:19 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 t_tokens	*tokenize(char *str)
 {

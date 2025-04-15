@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:58 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/15 14:32:20 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/15 14:49:11 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 t_cmd	*create_nodes(t_tokens *toks)
 {

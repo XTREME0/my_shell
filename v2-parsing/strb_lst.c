@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "../minishell.h"
 
 t_stb	*stb_new(char *str)
 {

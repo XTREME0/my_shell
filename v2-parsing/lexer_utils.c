@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:15 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:38:16 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:43:00 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 void	assign_redirs(t_tokens *toks)
 {

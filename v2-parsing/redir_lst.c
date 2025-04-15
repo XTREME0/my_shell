@@ -6,11 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:55 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/09 17:32:07 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:49:40 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 t_redirs	*ft_newredir(void)
 {

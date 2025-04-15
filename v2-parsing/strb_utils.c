@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "../minishell.h"
 
 char	*stb_merge(t_stb *build)
 {

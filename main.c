@@ -6,7 +6,7 @@
 /*   By: ataai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:24:30 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/14 18:01:06 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/15 15:25:31 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ int	shell_prompt(t_cmd *cmd_node, t_env *my_env)
 			continue ;
 		}
 		add_history(prompt);
-		cmd_node = construct_cmds(prompt);
+		cmd_node = construct_cmds(prompt, my_env);
 		if (cmd_node == NULL)
 			return (-1);
 		exec_setup(&cmd_node, &my_env);
