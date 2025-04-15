@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:51 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:37:52 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/13 16:54:32 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ static int	open_any(t_redirs *redir, t_cmd *cmd, t_redirs **in, t_redirs **out)
 {
 	int	fd;
 
-	fd = open(redir->filename, redir->perm, 0644);
-	if (fd < 0)
-	{
+	if (!open_check(redir, redir->perm))
 		fd = -2;
-		printf(FD_ERR, redir->filename, strerror(errno));
-	}
 	if (redir->io)
 	{
 		cmd->fd_in = fd;
@@ -69,13 +65,13 @@ int	create_redir(t_tokens *toks, t_redirs **redirs)
 	return (1);
 }
 
-int	create_heredocs(t_redirs *redirs)
+int	create_heredocs(t_redirs *redirs, t_env *env)
 {
 	while (redirs)
 	{
 		if (redirs->delim)
 		{
-			if (!read_heredoc(redirs))
+			if (!read_heredoc(redirs, env))
 				return (0);
 		}
 		redirs = redirs->next;
@@ -104,4 +100,4 @@ void	open_files(t_redirs *redirs, t_cmd *cmd)
 }
 
 // find a way to keep the node with fd_out and node with fd_in
-// their FDs must be kept open and kept 
+// their FDs must be kept open

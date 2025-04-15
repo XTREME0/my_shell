@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:36:57 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/11 22:23:44 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/15 14:28:30 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	get_io(t_tokens **head, t_redirs **redirs)
 	return (1);
 }
 
-int	open_redirs(t_cmd *cmd, t_tokens *toks)
+int	open_redirs(t_cmd *cmd, t_tokens *toks, t_env *env)
 {
 	t_tokens	*head;
 	t_redirs	*redirs;
@@ -77,7 +77,7 @@ int	open_redirs(t_cmd *cmd, t_tokens *toks)
 		redirs = NULL;
 		if (!get_io(&toks, &redirs))
 			return (toks = head, 0);
-		if (!create_heredocs(redirs))
+		if (!create_heredocs(redirs, env))
 			return (toks = head, 0);
 		open_files(redirs, cmd);
 		cmd = cmd->next;

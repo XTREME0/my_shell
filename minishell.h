@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:27:22 by ataai             #+#    #+#             */
-/*   Updated: 2025/04/14 14:34:07 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/15 14:30:19 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
-#include <sys/wait.h>
-#include <signal.h>
+# include <sys/wait.h>
+# include <signal.h>
+# include <stdarg.h>
 
 # define WHITE_SP "\r\t\v\f\n "
 # define HD_EOF "\nheredoc delimited by end-of-file (wanted \"%s\")\n"

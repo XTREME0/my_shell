@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:58 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/11 12:03:36 by ataai            ###   ########.fr       */
+/*   Updated: 2025/04/15 14:32:20 by ataai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,19 @@ void	del_other_cmds(t_cmd *cmd)
 	prev = cmd->prev;
 	while (prev)
 	{
-		tmp = prev->prev;
-		ft_delcmd(prev);
-		prev = tmp;
+		tmp = prev;
+		prev = prev->prev;
+		ft_delcmd(tmp);
 	}
+}
+
+void	advance(t_cmd **head)
+{
+	t_cmd	*tmp;
+
+	if (!head || !(*head))
+		return ;
+	tmp = (*head);
+	(*head) = (*head)->next;
+	ft_delcmd(tmp);
 }

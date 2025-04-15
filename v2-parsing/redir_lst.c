@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:55 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/08 15:37:56 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:32:07 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out)
 			unlink(tmp->filename);
 		free(tmp->delim);
 		free(tmp->filename);
-		if (tmp->fd >= 0)
+		if (tmp->fd > 2)
 			close(tmp->fd);
 		free(tmp);
 	}

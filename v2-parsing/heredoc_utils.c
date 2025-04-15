@@ -6,7 +6,11 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:44 by ariyad            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/09 17:26:01 by ataai            ###   ########.fr       */
+=======
+/*   Updated: 2025/04/13 17:55:21 by ariyad           ###   ########.fr       */
+>>>>>>> v2-parsing
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +33,10 @@ char	*ft_mkhtmp(void)
 	return (filename);
 }
 
-int	read_heredoc(t_redirs *redirs)
+static int	hereline(t_redirs *redirs, t_env *env, int tf)
 {
 	char	*line;
-
-	redirs->fd = open(redirs->filename, O_CREAT | O_RDWR, 0644);
-	if (redirs->fd == -1)
-	{
-		printf(FD_ERR, redirs->filename, strerror(errno));
-		return (0);
-	}
+	
 	while (1)
 	{
 		line = readline("> ");
@@ -49,9 +47,23 @@ int	read_heredoc(t_redirs *redirs)
 		}
 		if (ft_strcmp(line, redirs->delim) == 0)
 			break ;
-		write(redirs->fd, line, ft_strlen(line));
-		write(redirs->fd, "\n", 1);
+		reg_expand(&line, env, tf);
+		fd_printf(redirs->fd, "%s\n", line);
 		free(line);
 	}
-	return (close(redirs->fd), free(line), 1);
+	free(line);
+	return (1);
+}
+
+int	read_heredoc(t_redirs *redirs, t_env *env)
+{
+	int	tf;
+
+	tf = has_quotes(redirs->delim);
+	if (!remove_quote(&redirs->delim))
+		return (0);
+	if (!open_check(redirs, O_CREAT | O_RDWR))
+		return (0);
+	hereline(redirs, env, tf);
+	return (close(redirs->fd), 1);
 }
