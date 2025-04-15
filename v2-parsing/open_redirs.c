@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:36:57 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 16:55:20 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/14 15:42:18 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	open_redirs(t_cmd *cmd, t_tokens *toks, t_env *env)
 			return (toks = head, 0);
 		if (!create_heredocs(redirs, env))
 			return (toks = head, 0);
-		open_files(redirs, cmd);
+		open_files(redirs, cmd, env);
 		cmd = cmd->next;
 	}
 	return (toks = head, 1);

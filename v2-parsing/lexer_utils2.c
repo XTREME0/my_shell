@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:10 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 17:52:54 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:47:43 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,11 @@ void	reg_expand(char **s, t_env *env, int tf)
 	while (str[i])
 	{
 		j = i;
-		if (str[i] == '$')
+		if (str[i] == '$' && str[i + 1] != '.')
 		{
+			j++;
 			skip_expand(str, &j);
-			val = ft_substr(str, i, j - i);
+			val = ft_substr(str, i + 1, j - i);
 			if (!val)
 				return ;
 			replace(s, i, j - 1, env_val(env, val));
@@ -170,6 +171,8 @@ int	remove_quote(char **token)
 	char	*tok;
 	size_t	i;
 
+	if (!token || !(*token))
+		return (0);
 	new = malloc(count_q_words(*token) + 1);
 	if (!new)
 		return (0);
@@ -189,3 +192,13 @@ int	remove_quote(char **token)
 	*token = new;
 	return (1);
 }
+
+// void	all_expan(t_tokens **head, char **str, int in_quote, int file)
+// {
+// 	if (!head || !(*head) || !str || !(*str))
+// 		return ;
+// 	if (in_quote)
+// 	{
+// 		reg_expand();
+// 	}
+// }

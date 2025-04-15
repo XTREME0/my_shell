@@ -45,3 +45,19 @@ void	replace(char **s, size_t start, size_t end, char *replace)
 	*s = stb_merge(build);
 	stb_clear(&build);
 }
+
+void	chunkate(t_stb	**head, size_t	start, size_t end, char *str)
+{
+	t_stb	*new;
+	char	*s;
+
+	if (!str)
+		return ;
+	s = ft_substr(str, start, end - start);
+	if (!s)
+		return ;
+	new = stb_new(s);
+	if (!new)
+		return (free(s));
+	stb_addfront(head, new);
+}

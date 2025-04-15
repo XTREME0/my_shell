@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:36:37 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 17:42:21 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:33:29 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,36 @@ int	open_check(t_redirs *redir, int perm)
 	}
 	return (1);
 }
+
+// int	file_expand(t_tokens **token, char **str, t_env *env)
+// {
+// 	t_stb	*builder;
+// 	t_tokens	*lst;
+// 	char	*new;
+// 	size_t	i;
+// 	size_t	j;
+// 	int		in_quote;
+
+// 	if (!is_expan(*str))
+// 		return (remove_quote(str), 1);
+// 	i = 0;
+// 	j = 0;
+// 	builder = NULL;
+// 	while (str[0][j])
+// 	{
+// 		if (is_quote(str[0][j]))
+// 		{
+// 			in_quote = 1;
+// 			chunkate(&builder, i, j, *str);
+// 			i = j + 1;
+// 		}
+// 		if (str[0][j] == '$' && in_quote)
+// 			reg_expand(str, env, 0);
+// 		if (str[0][j] == '$' && !in_quote)
+// 		{
+// 			lst = split_expan(token, str, env);
+// 		}
+// 		j++;
+// 	}
+// 	chunkate(&builder, i, j, *str);
+// }

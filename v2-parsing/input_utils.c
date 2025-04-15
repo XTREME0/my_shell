@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:38:22 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/12 20:13:33 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:38:37 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ int	get_word(char *s, size_t *i, t_tokens **head)
 void	skip_expand(char *str, size_t *i)
 {
 	while (str[*i] && !ft_isspace(str[*i]) && !is_redir(str[*i])
-		&& !is_quote(str[*i]) && str[*i] != '.')
+		&& !is_quote(str[*i]) && str[*i] != '.' && str[*i] != '$')
 		*i += 1;
 }

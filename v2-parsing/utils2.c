@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:04 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 17:28:26 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:47:49 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	is_expan(char *val)
 {
 	size_t	i;
 
+	if (!val)
+		return (0);
 	i = 0;
 	while (val[i])
 	{
@@ -44,7 +46,7 @@ char	*env_val(t_env *env, char *exp)
 {
 	while (env)
 	{
-		if (ft_strcmp(env->key, exp + 1))
+		if (ft_strcmp(env->key, exp))
 		{
 			env = env->next;
 			continue ;

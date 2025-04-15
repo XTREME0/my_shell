@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:35:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 16:56:52 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:20:23 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ typedef struct s_stb
 	struct s_stb	*prev;
 }	t_stb;
 
-t_stb	*stb_new(char *str);
-void	stb_addfront(t_stb **head, t_stb *new);
-void	stb_addback(t_stb **head, t_stb *new);
-void	stb_clear(t_stb **head);
-char	*stb_merge(t_stb *build);
-void	replace(char **s, size_t start, size_t end, char *replace);
+t_stb		*stb_new(char *str);
+void		stb_addfront(t_stb **head, t_stb *new);
+void		stb_addback(t_stb **head, t_stb *new);
+void		stb_clear(t_stb **head);
+char		*stb_merge(t_stb *build);
+void		replace(char **s, size_t start, size_t end, char *replace);
+void		chunkate(t_stb	**head, size_t	start, size_t end, char *str);
 
 typedef enum token_types
 {
@@ -124,7 +125,7 @@ void		assign_cmds(t_tokens *toks);
 void		assign_words(t_tokens *toks);
 
 // expansion
-int			treat_strs(t_tokens **toks);
+int			treat_strs(t_tokens **toks, t_env *env);
 char		*env_val(t_env *env, char *exp);
 int			remove_quote(char **token);
 void		reg_expand(char **s, t_env *env, int tf);
@@ -143,7 +144,7 @@ void		ft_addcmd(t_cmd **head, t_cmd *new);
 void		ft_delcmd(t_cmd *cmd);
 void		ft_clearcmds(t_cmd	**head);
 t_cmd		*ft_firstcmd(t_cmd *cmd);
-t_cmd	*construct_cmds(char *str, t_env *env);
+t_cmd		*construct_cmds(char *str, t_env *env);
 
 // cmds
 t_cmd		*create_nodes(t_tokens *toks);
@@ -153,6 +154,7 @@ int			set_args(t_cmd *cmds, t_tokens *toks);
 
 void		set_pipe(t_cmd **cmd);
 int			open_check(t_redirs *redir, int perm);
+int			file_expand(t_tokens **token, char **str, t_env *env);
 
 // utils
 void		skip_spaces(char *s, size_t *i);
@@ -184,7 +186,8 @@ int			open_redirs(t_cmd *cmd, t_tokens *toks, t_env *env);
 int			create_redir(t_tokens *toks, t_redirs **redirs);
 int			read_heredoc(t_redirs *redirs, t_env *env);
 int			create_heredocs(t_redirs *redirs, t_env *env);
-void		open_files(t_redirs *redirs, t_cmd *cmd);
+void		open_files(t_redirs *redirs, t_cmd *cmd, t_env *env);
+void		which_redir_io(t_redirs *redir, t_cmd *cmd, t_redirs **in, t_redirs **out);
 
 // redirs list
 t_redirs	*ft_newredir(void);
@@ -194,6 +197,8 @@ void		clear_n_keep_redir(t_redirs **head, t_redirs *in, t_redirs *out);
 t_redirs	*ft_lastredir(t_redirs **head);
 
 char		*ft_mkhtmp(void);
+t_tokens	*split_expan(t_tokens **tok, char **str, t_env *env);
+void		expan_tailor(t_tokens **tok, t_tokens *new_lst);
 
 
 

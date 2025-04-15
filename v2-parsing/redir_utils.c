@@ -6,33 +6,37 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:37:51 by ariyad            #+#    #+#             */
-/*   Updated: 2025/04/13 16:54:32 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:33:56 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	open_any(t_redirs *redir, t_cmd *cmd, t_redirs **in, t_redirs **out)
+void	which_redir_io(t_redirs *redir, t_cmd *cmd, t_redirs **in,
+t_redirs **out)
 {
-	int	fd;
-
-	if (!open_check(redir, redir->perm))
-		fd = -2;
 	if (redir->io)
 	{
-		cmd->fd_in = fd;
+		cmd->fd_in = redir->fd;
 		(*in) = redir;
 	}
 	else
 	{
-		cmd->fd_out = fd;
+		cmd->fd_out = redir->fd;
 		(*out) = redir;
 	}
 	if (redir->delim)
 		cmd->heredoc_file = redir->filename;
 	else
 		cmd->heredoc_file = NULL;
-	if (fd < 0 && redir->io)
+}
+
+static int	open_any(t_redirs *redir, t_cmd *cmd, t_redirs **in, t_redirs **out)
+{
+	if (!open_check(redir, redir->perm))
+		redir->fd = -2;
+	which_redir_io(redir, cmd, in, out);
+	if (redir->fd < 0 && redir->io)
 		return (0);
 	return (1);
 }
@@ -79,7 +83,7 @@ int	create_heredocs(t_redirs *redirs, t_env *env)
 	return (1);
 }
 
-void	open_files(t_redirs *redirs, t_cmd *cmd)
+void	open_files(t_redirs *redirs, t_cmd *cmd, t_env *env)
 {
 	t_redirs	*head;
 	t_redirs	*in;
@@ -92,6 +96,12 @@ void	open_files(t_redirs *redirs, t_cmd *cmd)
 	head = redirs;
 	while (redirs)
 	{
+		// expand file name
+		// if (!file_expand(&redirs->filename, env))
+		// {
+		// 	which_redir_io(redirs, cmd, &in, &out);
+		// 	break ;
+		// }
 		if (!open_any(redirs, cmd, &in, &out))
 			break ;
 		redirs = redirs->next;
